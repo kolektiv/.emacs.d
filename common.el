@@ -37,6 +37,10 @@
 	  '(lambda ()
 	     (yas/minor-mode-on)))
 
+; Set up io-mode
+(require 'io-mode)
+(add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
+
 ; Set up ioke-mode
 (require 'ioke-mode)
 (require 'inf-ioke)

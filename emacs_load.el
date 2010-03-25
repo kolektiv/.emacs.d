@@ -12,6 +12,7 @@
   (add-path "packages")
   (add-path "packages/lua-mode")
   (add-path "packages/scala-mode")
+  (add-path "packages/io-mode")
   (add-path "packages/ioke-mode")
   (add-path "packages/yasnippet"))
 
