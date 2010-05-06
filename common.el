@@ -50,3 +50,9 @@
 (require 'lua-mode)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-hook 'lua-mode-hook 'turn-on-font-lock)
+
+; Set up haskell-mode
+(load "haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'imenu-add-menubar-index)

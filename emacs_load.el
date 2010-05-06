@@ -10,6 +10,7 @@
 				(concat emacs-root p))))
   (add-path "")
   (add-path "packages")
+  (add-path "packages/haskell-mode")
   (add-path "packages/lua-mode")
   (add-path "packages/scala-mode")
   (add-path "packages/io-mode")
