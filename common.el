@@ -8,6 +8,10 @@
 ; Shorten questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+; Sensible behaviour about newlines at file end
+(setq require-final-newline t)
+(setq next-line-add-newlines nil)
+
 ; Use Dired+
 (require 'dired+)
 (toggle-dired-find-file-reuse-dir 1)
