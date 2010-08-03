@@ -11,6 +11,7 @@
   (add-path "")
   (add-path "packages")
   (add-path "packages/csharp-mode")
+  (add-path "packages/haskell-mode")
   (add-path "packages/lua-mode")
   (add-path "packages/scala-mode")
   (add-path "packages/io-mode")

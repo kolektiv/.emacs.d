@@ -8,6 +8,10 @@
 ; Shorten questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+; Sensible behaviour about newlines at file end
+(setq require-final-newline t)
+(setq next-line-add-newlines nil)
+
 ; Use Dired+
 (require 'dired+)
 (toggle-dired-find-file-reuse-dir 1)
@@ -58,3 +62,9 @@
   ; Personal mode hooks here...
   )
 (add-hook 'csharp-mode-hook 'my-csharp-mode-fn t)
+
+; Set up haskell-mode
+(load "haskell-site-file")
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
