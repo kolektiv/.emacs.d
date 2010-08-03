@@ -50,3 +50,11 @@
 (require 'lua-mode)
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-hook 'lua-mode-hook 'turn-on-font-lock)
+
+; Set up csharp-mode
+(require 'csharp-mode)
+(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
+(defun my-csharp-mode-fn ()
+  ; Personal mode hooks here...
+  )
+(add-hook 'csharp-mode-hook 'my-csharp-mode-fn t)
