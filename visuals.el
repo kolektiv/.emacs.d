@@ -48,7 +48,16 @@
  '(diredp-no-priv ((t (:foreground "#999999"))))
  '(diredp-read-priv ((t (:background "#777777"))))
  '(diredp-write-priv ((t (:background "#666666"))))
- 
+
+ ;; org-mode face
+ '(org-agenda-dimmed-todo-face ((((background dark)) (:foreground "#cccccc"))))
+ '(org-document-info ((((class color) (background dark)) (:foreground "#767676"))))
+ '(org-document-info-keyword ((t (:foreground "#4e4e4e"))))
+ '(org-document-title ((((class color) (background dark)) (:foreground "#767676" :weight normal))))
+ '(org-done ((t (:bold t :foreground "ForestGreen"))))
+ '(org-meta-line ((t (:inherit font-lock-comment-face :foreground "#4e4e4e"))))
+ '(org-todo ((t (:bold t :foreground "Red"))))
+
  ;; Font Lock faces
  '(font-lock-builtin-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ffaf00"))))
  '(font-lock-comment-delimiter-face ((t (:foreground "#4e4e4e"))))
