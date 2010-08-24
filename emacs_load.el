@@ -16,7 +16,8 @@
   (add-path "packages/scala-mode")
   (add-path "packages/io-mode")
   (add-path "packages/ioke-mode")
-  (add-path "packages/yasnippet"))
+  (add-path "packages/yasnippet")
+  (add-path"packages/org-mode/lisp"))
 
 ; Load common settings for all platforms.
 (load "common.el")
