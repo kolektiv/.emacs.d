@@ -15,7 +15,9 @@
 
 ;; Set the fringe to 15 px wide
 (custom-set-variables
- '(fringe-mode 15 nil (fringe)))
+ '(fringe-mode 15 nil (fringe))
+ '(org-export-html-style-include-default nil)
+ '(org-export-html-use-infojs t))
 
 ;; Faces for various modes
 (custom-set-faces

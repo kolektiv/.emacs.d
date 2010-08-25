@@ -78,3 +78,6 @@
 (add-hook 'org-mode-hook 'visual-line-mode)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'org-mode-hook
+          (lambda ()
+            (setq org-export-htmlize-output-type 'css)))
