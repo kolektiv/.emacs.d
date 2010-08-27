@@ -17,7 +17,7 @@
 (custom-set-variables
  '(fringe-mode 15 nil (fringe))
  '(org-export-html-style-include-default nil)
- '(org-export-html-use-infojs t))
+ '(org-export-html-use-infojs nil))
 
 ;; Faces for various modes
 (custom-set-faces
