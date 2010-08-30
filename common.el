@@ -60,7 +60,8 @@
 (add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
 (defun my-csharp-mode-fn ()
   ; Personal mode hooks here...
-  )
+  (setq indent-tabs-mode nil)
+  (setq c-indent-level 4))
 (add-hook 'csharp-mode-hook 'my-csharp-mode-fn t)
 
 ; Set up haskell-mode

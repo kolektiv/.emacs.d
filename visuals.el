@@ -53,10 +53,23 @@
 
  ;; org-mode face
  '(org-agenda-dimmed-todo-face ((((background dark)) (:foreground "#cccccc"))))
+ '(org-code ((t (:foreground "#767676"))))
  '(org-document-info ((((class color) (background dark)) (:foreground "#767676"))))
  '(org-document-info-keyword ((t (:foreground "#4e4e4e"))))
  '(org-document-title ((((class color) (background dark)) (:foreground "#767676" :weight normal))))
  '(org-done ((t (:bold t :foreground "ForestGreen"))))
+ '(org-ellipsis ((((class color) (background dark)) (:foreground "#767676"))))
+ '(org-footnote ((((class color) (background dark)) (:foreground "#ff7800" :underline t))))
+ '(org-hide ((((background dark)) (:foreground "#4e4e4e"))))
+ '(org-level-1 ((t (:inherit outline-1 :foreground "#ff7e00"))))
+ '(org-level-2 ((t (:inherit outline-2 :foreground "#ff9400"))))
+ '(org-level-3 ((t (:inherit outline-3 :foreground "#ffb200"))))
+ '(org-level-4 ((t (:inherit outline-4 :foreground "#ffd500"))))
+ '(org-level-5 ((t (:inherit outline-5 :foreground "#fef100"))))
+ '(org-level-6 ((t (:inherit outline-6 :foreground "#dbfd00"))))
+ '(org-level-7 ((t (:inherit outline-7 :foreground "#b3ff00"))))
+ '(org-level-8 ((t (:foreground "#98f000" :slant normal))))
+ '(org-link ((((class color) (background dark)) (:foreground "#ff3700" :underline t))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :foreground "#4e4e4e"))))
  '(org-todo ((t (:bold t :foreground "Red"))))
 
