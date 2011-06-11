@@ -17,6 +17,7 @@
   (add-path "packages/io-mode")
   (add-path "packages/ioke-mode")
   (add-path "packages/yasnippet")
+  (add-path "packages/js2-mode")
   (add-path"packages/org-mode/lisp"))
 
 ; Load common settings for all platforms.

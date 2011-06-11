@@ -82,3 +82,7 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (setq org-export-htmlize-output-type 'css)))
+
+; Set up js2-mode
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
