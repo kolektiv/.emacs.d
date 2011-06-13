@@ -1,12 +1,10 @@
-
-<!-- saved from url=(0064)https://raw.github.com/defunkt/coffee-mode/master/coffee-mode.el -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></head><body><pre style="word-wrap: break-word; white-space: pre-wrap;">;;; coffee-mode.el --- Major mode to edit CoffeeScript files in Emacs
+;;; coffee-mode.el --- Major mode to edit CoffeeScript files in Emacs
 
 ;; Copyright (C) 2010 Chris Wanstrath
 
 ;; Version 0.3.0
 ;; Keywords: CoffeeScript major mode
-;; Author: Chris Wanstrath &lt;chris@ozmm.org&gt;
+;; Author: Chris Wanstrath <chris@ozmm.org>
 ;; URL: http://github.com/defunkt/coffee-script
 
 ;; This file is not part of GNU Emacs.
@@ -52,7 +50,7 @@
 
 ;; TODO:
 ;; - Execute {buffer,region,line} and show output in new buffer
-;; - Make prototype accessor assignments like `String::length: -&gt; 10` pretty.
+;; - Make prototype accessor assignments like `String::length: -> 10` pretty.
 ;; - mirror-mode - close brackets and parens automatically
 
 ;;; Code:
@@ -134,7 +132,7 @@ path."
          (setq ,var ,val))
     `(setq ,var ,val)))
 
-(defun coffee-debug (string &amp;rest args)
+(defun coffee-debug (string &rest args)
   "Print a message when in debug mode."
   (when coffee-debug-mode
       (apply 'message (append (list string) args))))
@@ -243,7 +241,7 @@ path."
 (defvar coffee-assign-regexp "\\(\\(\\w\\|\\.\\|_\\|$\\)+?\s*\\):")
 
 ;; Lambda
-(defvar coffee-lambda-regexp "\\((.+)\\)?\\s *\\(-&gt;\\|=&gt;\\)")
+(defvar coffee-lambda-regexp "\\((.+)\\)?\\s *\\(->\\|=>\\)")
 
 ;; Namespaces
 (defvar coffee-namespace-regexp "\\b\\(class\\s +\\(\\S +\\)\\)\\b")
@@ -326,9 +324,9 @@ For detail, see `comment-dwim'."
 ;;
 ;; Should cover cases like these:
 ;;
-;; minus: (x, y) -&gt; x - y
-;; String::length: -&gt; 10
-;; block: -&gt;
+;; minus: (x, y) -> x - y
+;; String::length: -> 10
+;; block: ->
 ;;   print('potion')
 ;;
 ;; Next we look for any line that starts with `class' or
@@ -340,20 +338,20 @@ For detail, see `comment-dwim'."
 ;; Should cover cases like these:
 ;;
 ;; class Person
-;;   print: -&gt;
+;;   print: ->
 ;;     print 'My name is ' + this.name + '.'
 ;;
 ;; class Policeman extends Person
-;;   constructor: (rank) -&gt;
+;;   constructor: (rank) ->
 ;;     @rank: rank
-;;   print: -&gt;
+;;   print: ->
 ;;     print 'My name is ' + this.name + " and I'm a " + this.rank + '.'
 ;;
 ;; TODO:
 ;; app = {
 ;;   window:  {width: 200, height: 200}
-;;   para:    -&gt; 'Welcome.'
-;;   button:  -&gt; 'OK'
+;;   para:    -> 'Welcome.'
+;;   button:  -> 'OK'
 ;; }
 
 (defun coffee-imenu-create-index ()
@@ -364,7 +362,7 @@ For detail, see `comment-dwim'."
   (goto-char (point-min))
 
   (let ((index-alist '()) assign pos indent ns-name ns-indent)
-    ;; Go through every assignment that includes -&gt; or =&gt; on the same
+    ;; Go through every assignment that includes -> or => on the same
     ;; line or starts with `class'.
     (while (re-search-forward
             (concat "^\\(\\s *\\)"
@@ -407,15 +405,15 @@ For detail, see `comment-dwim'."
 
           ;; If we're within the context of a namespace, add that to the
           ;; front of the assign, e.g.
-          ;; constructor: =&gt; Policeman::constructor
-          (when (and ns-name (&gt; indent ns-indent))
+          ;; constructor: => Policeman::constructor
+          (when (and ns-name (> indent ns-indent))
             (setq assign (concat ns-name assign)))
 
           (coffee-debug "=: Found %s with indent %s" assign indent)
 
           ;; Clear the namespace if we're no longer indented deeper
           ;; than it.
-          (when (and ns-name (&lt;= indent ns-indent))
+          (when (and ns-name (<= indent ns-indent))
             (coffee-debug "ns: Clearing %s" ns-name)
             (setq ns-name nil)
             (setq ns-indent nil))
@@ -459,7 +457,7 @@ For detail, see `comment-dwim'."
         (coffee-debug "New indent: %s" (current-indentation))
 
         ;; We're too far, remove all indentation.
-        (when (&gt; (- (current-indentation) prev-indent) coffee-tab-width)
+        (when (> (- (current-indentation) prev-indent) coffee-tab-width)
           (backward-to-indentation 0)
           (delete-region (point-at-bol) (point)))))))
 
@@ -514,7 +512,7 @@ next line should probably be indented.")
   "Builds a regexp out of `coffee-indenters-bol' words."
   (concat "^" (regexp-opt coffee-indenters-bol 'words)))
 
-(defvar coffee-indenters-eol '(?&gt; ?{ ?\[)
+(defvar coffee-indenters-eol '(?> ?{ ?\[)
   "Single characters at the end of a line that mean the next line
 should probably be indented.")
 
@@ -581,8 +579,8 @@ line? Returns `t' or `nil'. See the README for more details."
   (setq font-lock-defaults '((coffee-font-lock-keywords)))
 
   ;; perl style comment: "# ..."
-  (modify-syntax-entry ?# "&lt; b" coffee-mode-syntax-table)
-  (modify-syntax-entry ?\n "&gt; b" coffee-mode-syntax-table)
+  (modify-syntax-entry ?# "< b" coffee-mode-syntax-table)
+  (modify-syntax-entry ?\n "> b" coffee-mode-syntax-table)
   (make-local-variable 'comment-start)
   (setq comment-start "#")
 
@@ -614,4 +612,3 @@ line? Returns `t' or `nil'. See the README for more details."
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("Cakefile" . coffee-mode))
-</pre></body></html>
