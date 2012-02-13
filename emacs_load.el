@@ -30,6 +30,10 @@
 	(eq system-type 'cygwin))
     (load "windows.el"))
 
+; Load OS X specific setup if running under OS X.
+(if (eq system-type 'darwin)
+    (load "osx.el"))
+
 (load "visuals.el")
 
 ; Load startup file (things to do once everything is loaded!)
