@@ -22,7 +22,7 @@
 ;; Faces for various modes
 (custom-set-faces
  ;; Standard font
- '(default ((t (:background "#262626" :foreground "#d0d0d0" :height 112 :width normal :foundry "outline" :family "Consolas"))))
+ '(default ((t (:background "#262626" :foreground "#d0d0d0" :height 130 :width normal :foundry "outline" :family "Monaco"))))
 
  ;; Cursor
  '(cursor ((t (:background "#e4e4e4"))))

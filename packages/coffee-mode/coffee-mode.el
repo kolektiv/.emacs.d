@@ -338,9 +338,13 @@ If FILENAME is omitted, the current buffer's file name is used."
 
 ;; Reserved keywords either by JS or CS.
 (defvar coffee-js-reserved
-      '("case" "default" "do" "function" "var" "void" "with"
-        "const" "let" "debugger" "enum" "export" "import" "native"
-        "__extends" "__hasProp"))
+  '("case" "default" "do" "function" "var" "void" "with"
+    "const" "let" "debugger" "enum" "export" "import" "native"
+    "__extends" "__hasProp"))
+
+;; Reserved keywords for CommonJS.
+(defvar common-js-reserved
+  '("require" "exports" "module"))
 
 ;; CoffeeScript keywords.
 (defvar coffee-cs-keywords
@@ -352,8 +356,8 @@ If FILENAME is omitted, the current buffer's file name is used."
                                 (append
                                  coffee-js-reserved
                                  coffee-js-keywords
-                                 coffee-cs-keywords) 'words))
-
+                                 coffee-cs-keywords
+				 common-js-reserved) 'words))
 
 ;; Create the list for font-lock. Each class of keyword is given a
 ;; particular face.
