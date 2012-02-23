@@ -19,6 +19,10 @@
  '(org-export-html-style-include-default nil)
  '(org-export-html-use-infojs nil))
 
+;; Set the default window size
+(add-to-list 'default-frame-alist (cons 'width 120))
+(add-to-list 'default-frame-alist (cons 'height 50))
+
 ;; Faces for various modes
 (custom-set-faces
  ;; Standard font
@@ -86,8 +90,11 @@
  '(font-lock-type-face ((((class color) (min-colors 88) (background dark)) (:foreground "#afd700"))))
  '(font-lock-variable-name-face ((((class color) (min-colors 88) (background dark)) (:foreground "#ffff00"))))
 
+ ;; JS2 Faces
+ '(js2-function-param-face ((t (:foreground "#ffd500"))))
+
  ;; Minibuffer prompts
- '(minibuffer-prompt ((((class color) (min-colors 88) (background dark)) (:background "#ff0000" :foreground "#d0d0d0"))))
+ '(minibuffer-prompt ((((class color) (min-colors 88) (background dark)) (:background "#262626" :foreground "#ffd500"))))
  '(minibuffer-noticeable-prompt ((((class color) (min-colors 88) (background dark)) (:background "#ff5f00" :foreground "#262626"))))
 
  ;; Mode lines
@@ -100,4 +107,14 @@
  ;; Selection highlighting
  '(region ((((class color) (min-colors 88) (background dark)) (:background "#4e4e4e" :foreground "#ff5f00"))))
  '(highlight ((((class color) (min-colors 88) (background dark)) (:background "#4e4e4e" :foreground "#d75f00"))))
- '(show-paren-match ((((class color) (background dark)) (:background "#666666" :foreground "#ffcc33")))))
+ '(show-paren-match ((((class color) (background dark)) (:background "#666666" :foreground "#ffcc33"))))
+
+ ;; IDO colors
+ '(ido-subdir ((t (:foreground "#CCCCCC")))) ;; Face used by ido for highlighting subdirs in the alternatives.
+ '(ido-first-match ((t (:foreground "#ff7e00")))) ;; Face used by ido for highlighting first match.
+ '(ido-only-match ((t (:foreground "#ff0000")))) ;; Face used by ido for highlighting only match.
+ '(ido-indicator ((t (:foreground "#767676")))) ;; Face used by ido for highlighting its indicators (don't actually use this)
+ '(ido-incomplete-regexp ((t (:foreground "#FFFFFF")))) ;; Ido face for indicating incomplete regexps. (don't use this either)
+
+)
+

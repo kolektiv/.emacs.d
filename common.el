@@ -29,6 +29,10 @@
 ; Let me actually type # on a mac!
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
 
+; Use IDO mode
+(require 'ido)
+(ido-mode)
+
 ; Tell the internal shell to use ansi mode so it can deal with colours.
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
