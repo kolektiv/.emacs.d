@@ -26,6 +26,9 @@
       kept-new-versions 3
       version-control t)
 
+; Let me actually type # on a mac!
+(global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
+
 ; Tell the internal shell to use ansi mode so it can deal with colours.
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
