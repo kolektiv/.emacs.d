@@ -93,6 +93,8 @@
 ; Set up js2-mode
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+(setq js2-basic-offset 2)
 
 ; Set up coffee-mode
 (require 'coffee-mode)
@@ -108,3 +110,8 @@
   "Major mode for editing Markdown files" t)
 (setq auto-mode-alist
       (cons '("\\.md" . markdown-mode) auto-mode-alist))
+
+; Set up mustache-mode
+(require 'mustache-mode)
+(setq auto-mode-alist 
+      (cons '("\\.hog" . html-mode) auto-mode-alist))

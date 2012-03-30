@@ -20,7 +20,8 @@
   (add-path "packages/js2-mode")
   (add-path "packages/coffee-mode")
   (add-path "packages/org-mode/lisp")
-  (add-path "packages/markdown-mode"))
+  (add-path "packages/markdown-mode")
+  (add-path "packages/mustache-mode"))
 
 ; Load common settings for all platforms.
 (load "common.el")
