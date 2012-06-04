@@ -12,6 +12,9 @@
 (setq require-final-newline t)
 (setq next-line-add-newlines nil)
 
+; Sensible tab widths by default
+; (setq-default tab-width 4)
+
 ; Use Dired+
 (require 'dired+)
 (toggle-dired-find-file-reuse-dir 1)
@@ -28,6 +31,12 @@
 
 ; Let me actually type # on a mac!
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
+
+; Use Uniquify
+(require 'uniquify)
+(setq
+ uniquify-buffer-name-style 'forward
+ uniquify-separator ":")
 
 ; Use IDO mode
 (require 'ido)
@@ -94,6 +103,9 @@
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
+(setq js2-mode-hook
+      '(lambda () (progn
+		    (set-variable 'indent-tabs-mode nil))))
 
 ; Set up coffee-mode
 (require 'coffee-mode)
@@ -114,3 +126,6 @@
 (require 'mustache-mode)
 (setq auto-mode-alist 
       (cons '("\\.hog" . html-mode) auto-mode-alist))
+
+; Set up go-mode
+(require 'go-mode-load)
