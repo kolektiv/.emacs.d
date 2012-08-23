@@ -22,7 +22,8 @@
   (add-path "packages/org-mode/lisp")
   (add-path "packages/markdown-mode")
   (add-path "packages/mustache-mode")
-  (add-path "packages/go-mode"))
+  (add-path "packages/go-mode")
+  (add-path "packages/less-css-mode"))
 
 ; Load common settings for all platforms.
 (load "common.el")
@@ -40,14 +41,3 @@
 
 ; Load startup file (things to do once everything is loaded!)
 (load "on-start.el")
-
-;;; This was installed by package-install.el.
-;;; This provides support for the package system and
-;;; interfacing with ELPA, the package archive.
-;;; Move this code earlier if you want to reference
-;;; packages in your .emacs.
-(defvar elpa-package (concat emacs-root "elpa/package.el"))
-
-(when
-    (load elpa-package)
-  (package-initialize))

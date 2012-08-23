@@ -127,5 +127,14 @@
 (setq auto-mode-alist 
       (cons '("\\.hog" . html-mode) auto-mode-alist))
 
+; Associate EJS with html-mode
+(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
+
 ; Set up go-mode
 (require 'go-mode-load)
+(setq go-mode-hook
+      '(lambda () (progn
+		    (set-variable 'tab-width 4))))
+
+; Set up less-css-mode
+(require 'less-css-mode)
