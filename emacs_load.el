@@ -23,7 +23,8 @@
   (add-path "packages/markdown-mode")
   (add-path "packages/mustache-mode")
   (add-path "packages/go-mode")
-  (add-path "packages/less-css-mode"))
+  (add-path "packages/less-css-mode")
+  (add-path "packages/json-mode"))
 
 ; Load common settings for all platforms.
 (load "common.el")

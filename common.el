@@ -102,7 +102,6 @@
 ; Set up js2-mode
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (setq js2-mode-hook
       '(lambda () (progn
 		    (set-variable 'indent-tabs-mode nil))))
@@ -138,3 +137,6 @@
 
 ; Set up less-css-mode
 (require 'less-css-mode)
+
+; Set up json-mode
+(require 'json-mode)
