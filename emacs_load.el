@@ -24,7 +24,8 @@
   (add-path "packages/mustache-mode")
   (add-path "packages/go-mode")
   (add-path "packages/less-css-mode")
-  (add-path "packages/json-mode"))
+  (add-path "packages/json-mode")
+  (add-path "packages/fsharp-mode"))
 
 ; Load common settings for all platforms.
 (load "common.el")

@@ -140,3 +140,7 @@
 
 ; Set up json-mode
 (require 'json-mode)
+
+; Set up fsharp-mode
+(setq auto-mode-alist (cons '("\\.fs[iylx]?$" . fsharp-mode) auto-mode-alist))
+(autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
