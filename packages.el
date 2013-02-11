@@ -6,6 +6,7 @@
 ; Define required third party packages
 (setq packages
       '(clojure-mode
+		fsharp-mode
 		haskell-mode
        	js2-mode
 		lua-mode
