@@ -4,11 +4,12 @@
 
 (setq packages
       '(clojure-mode
-	haskell-mode
+		haskell-mode
        	js2-mode
-	lua-mode
-	markdown-mode
-	scala-mode2))
+		lua-mode
+		markdown-mode
+		scala-mode2
+		dired+))
 
 (require 'package)
 
@@ -16,7 +17,7 @@
   (add-to-list 'package-archives archive))
 
 (package-initialize)
-(package-refresh-contents)
+;; (package-refresh-contents)
 
 (dolist (package packages)
   (unless (package-installed-p package)

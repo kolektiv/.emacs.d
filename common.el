@@ -13,21 +13,21 @@
 (setq next-line-add-newlines nil)
 
 ; Sensible tab widths by default
-; (setq-default tab-width 4)
+(setq-default tab-width 4)
 
 ; Use Dired+
 (require 'dired+)
-(toggle-dired-find-file-reuse-dir 1)
+(toggle-diredp-find-file-reuse-dir t)
 
 ; Use Backup-Dir (don't spread *~ files everywhere!)
-(require 'backup-dir)
-(make-variable-buffer-local 'backup-inhibited)
-(setq bkup-backup-directory-info
-      '((t "~/.backup" ok-create full-path prepend-name)))
-(setq delete-old-versions t
-      kept-old-versions 1
-      kept-new-versions 3
-      version-control t)
+(setq 
+ backup-by-copying t
+ backup-directory-alist
+ `(("." . "~/.saves"))
+ delete-old-versions t
+ kept-old-versions 2
+ kept-new-versions 10
+ version-control t)
 
 ; Let me actually type # on a mac!
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
@@ -45,102 +45,4 @@
 ; Tell the internal shell to use ansi mode so it can deal with colours.
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
-; Set up yasnippet
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/packages/yasnippet/snippets")
-
-; Set up scala-mode
-(require 'scala-mode-auto)
-(yas/load-directory "~/.emacs.d/packages/scala-mode/contrib/yasnippet/snippets")
-(add-hook 'scala-mode-hook
-	  '(lambda ()
-	     (yas/minor-mode-on)))
-
-; Set up io-mode
-(require 'io-mode)
-(add-to-list 'auto-mode-alist '("\\.io$" . io-mode))
-
-; Set up ioke-mode
-(require 'ioke-mode)
-(require 'inf-ioke)
-(add-to-list 'auto-mode-alist '("\\.ik$" . ioke-mode))
-
-; Set up lua-mode
-(require 'lua-mode)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-(add-hook 'lua-mode-hook 'turn-on-font-lock)
-
-; Set up csharp-mode
-(require 'csharp-mode)
-(add-to-list 'auto-mode-alist '("\\.cs$" . csharp-mode))
-(defun my-csharp-mode-fn ()
-  ; Personal mode hooks here...
-  (setq indent-tabs-mode nil)
-  (setq c-indent-level 4))
-(add-hook 'csharp-mode-hook 'my-csharp-mode-fn t)
-
-; Set up haskell-mode
-(load "haskell-site-file")
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'imenu-add-menubar-index)
-
-; Set up org-mode from packages
-(require 'org-install)
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-(add-hook 'org-mode-hook 'visual-line-mode)
-(add-hook 'org-mode-hook 'turn-on-auto-fill)
-(add-hook 'org-mode-hook 'flyspell-mode)
-(add-hook 'org-mode-hook
-          (lambda ()
-            (setq org-export-htmlize-output-type 'css)))
-
-; Set up js2-mode
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(setq js2-mode-hook
-      '(lambda () (progn
-		    (set-variable 'indent-tabs-mode nil))))
-
-; Set up coffee-mode
-(require 'coffee-mode)
-(defun coffee-custom ()
-  "coffee-mode-hook"
-  (set (make-local-variable 'tab-width) 2))
-
-(add-hook 'coffee-mode-hook
-	  '(lambda() (coffee-custom)))
-
-; Set up markdown-mode
-(autoload 'markdown-mode "markdown-mode.el"
-  "Major mode for editing Markdown files" t)
-(setq auto-mode-alist
-      (cons '("\\.md" . markdown-mode) auto-mode-alist))
-
-; Set up mustache-mode
-(require 'mustache-mode)
-(setq auto-mode-alist 
-      (cons '("\\.hog" . html-mode) auto-mode-alist))
-
-; Associate EJS with html-mode
-(add-to-list 'auto-mode-alist '("\\.ejs$" . html-mode))
-
-; Set up go-mode
-(require 'go-mode-load)
-(setq go-mode-hook
-      '(lambda () (progn
-		    (set-variable 'tab-width 4))))
-
-; Set up less-css-mode
-(require 'less-css-mode)
-
-; Set up json-mode
-(require 'json-mode)
-
-; Set up fsharp-mode
-(setq auto-mode-alist (cons '("\\.fs[iylx]?$" . fsharp-mode) auto-mode-alist))
-(autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
+(provide 'common)
