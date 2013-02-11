@@ -4,11 +4,11 @@
 
 (setq packages
       '(clojure-mode
-	      haskell-mode
+	haskell-mode
        	js2-mode
-	      lua-mode
-	      markdown-mode
-	      scala-mode2))
+	lua-mode
+	markdown-mode
+	scala-mode2))
 
 (require 'package)
 

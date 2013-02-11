@@ -1,2 +1,2 @@
 (load
- (expand-file-name "~/.emacs.d/emacs_load.el"))
+ (expand-file-name "~/.emacs.d/init.el"))

@@ -1,29 +1,20 @@
-;; Turn off the splash screen
 (setq inhibit-splash-screen t)
-
-;; Turn cursor blinking off
 (blink-cursor-mode 0)
 
-;; Turn off any chrome, etc.
 (if (fboundp 'scroll-bar-mode)
     (scroll-bar-mode -1))
+
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
-;; For now having a menu bar can be handy
-;(if (fboundp 'menu-bar-mode)
-;    (menu-bar-mode -1))
 
-;; Set the fringe to 15 px wide
 (custom-set-variables
  '(fringe-mode 15 nil (fringe))
  '(org-export-html-style-include-default nil)
  '(org-export-html-use-infojs nil))
 
-;; Set the default window size
 (add-to-list 'default-frame-alist (cons 'width 120))
 (add-to-list 'default-frame-alist (cons 'height 50))
 
-;; Faces for various modes
 (custom-set-faces
  ;; Standard font
  '(default ((t (:background "#262626" :foreground "#d0d0d0" :height 130 :width normal :foundry "outline" :family "Monaco"))))
@@ -118,3 +109,4 @@
 
 )
 
+(provide 'ui)
