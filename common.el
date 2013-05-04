@@ -16,8 +16,8 @@
 (setq-default tab-width 4)
 
 ; Use Dired+
-(require 'dired+)
-(toggle-diredp-find-file-reuse-dir t)
+; (require 'dired+)
+; (toggle-diredp-find-file-reuse-dir t)
 
 ; Use Backup-Dir (don't spread *~ files everywhere!)
 (setq 
@@ -41,6 +41,10 @@
 ; Use IDO mode
 (require 'ido)
 (ido-mode)
+
+; Use Puppet mode
+(require 'puppet-mode)
+(add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
 
 ; Tell the internal shell to use ansi mode so it can deal with colours.
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)

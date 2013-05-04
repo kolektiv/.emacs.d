@@ -6,13 +6,13 @@
 ; Define required third party packages
 (setq packages
       '(clojure-mode
-		fsharp-mode
+;		fsharp-mode
 		haskell-mode
-       	js2-mode
+		js2-mode
 		lua-mode
 		markdown-mode
-		scala-mode2
-		dired+))
+		puppet-mode
+		scala-mode2))
 
 ; Load package.el package management system
 (require 'package)
