@@ -16,18 +16,24 @@
 (setq-default tab-width 4)
 
 ; Use Dired+
-; (require 'dired+)
-; (toggle-diredp-find-file-reuse-dir t)
+(require 'dired+)
+(toggle-diredp-find-file-reuse-dir t)
 
 ; Use Backup-Dir (don't spread *~ files everywhere!)
 (setq 
  backup-by-copying t
  backup-directory-alist
- `(("." . "~/.saves"))
+ '(("." . "~/.saves"))
  delete-old-versions t
  kept-old-versions 2
  kept-new-versions 10
  version-control t)
+
+(setq backup-directory-alist
+	  `((".*" . ,temporary-file-directory)))
+
+(setq auto-save-file-name-transforms
+	  `((".*" ,temporary-file-directory t)))
 
 ; Let me actually type # on a mac!
 (global-set-key (kbd "M-3") '(lambda () (interactive) (insert "#")))
@@ -42,11 +48,28 @@
 (require 'ido)
 (ido-mode)
 
-; Use Puppet mode
-(require 'puppet-mode)
-(add-to-list 'auto-mode-alist '("\\.pp$" . puppet-mode))
+; Use Markdown mode
+(require 'markdown-mode)
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+
+; Use Less mode
+(require 'less-css-mode)
+(add-to-list 'auto-mode-alist '("\\.less$" . less-css-mode))
+
+; Use Sass mode
+(require 'sass-mode)
+(add-to-list 'auto-mode-alist '("\\.scss$" . sass-mode))
 
 ; Tell the internal shell to use ansi mode so it can deal with colours.
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+; Use js2 mode
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(setq-default js2-include-node-externs t)
+
+; User web mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
 
 (provide 'common)
