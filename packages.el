@@ -7,10 +7,8 @@
 (setq packages
       '(clojure-mode
 		dired+
-		haml-mode
 		haskell-mode
 		js2-mode
-		less-css-mode
 		markdown-mode
 		sass-mode
 		web-mode))
