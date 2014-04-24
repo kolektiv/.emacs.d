@@ -15,6 +15,9 @@
 ; Sensible tab widths by default
 (setq-default tab-width 4)
 
+; Spaces, not tabs!
+(setq-default indent-tabs-mode nil)
+
 ; Use Dired+
 (require 'dired+)
 (toggle-diredp-find-file-reuse-dir t)
@@ -75,5 +78,10 @@
   (setq web-mode-code-indent-offset 2))
 
 (add-hook 'web-mode-hook 'my-web-mode-hook)
+
+; Haskell mode
+(add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
 
 (provide 'common)
