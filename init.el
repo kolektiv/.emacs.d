@@ -1,23 +1,39 @@
-; Add current Emacs dir to load path
-(add-to-list 'load-path 
-	     user-emacs-directory)
+;; Commmon Lisp
 
-; Add Emacs OS dir (OS specific settings) to load path
-(add-to-list 'load-path 
-	     (concat user-emacs-directory 
-		     (convert-standard-filename "os/")))
-
-; Load Common Lisp compatibility functions
 (require 'cl)
 
-; Load packages from archives using package.el
-(require 'packages)
+;; Paths
 
-; Load general customisations
-(require 'common)
+(defun ac/paths/make (p)
+  (concat user-emacs-directory
+	  (convert-standard-filename p)))
 
-; Load OS specific customisations
-(require system-type)
+(defun ac/paths/add (p)
+  (add-to-list 'load-path (eval p)))
 
-; Load UI customisations
-(require 'ui)
+(defun ac/paths/load (ps)
+  (mapc 'ac/paths/add ps))
+
+(setq ac/paths/lisp (ac/paths/make "lisp"))
+(setq ac/paths/os (ac/paths/make "lisp/os"))
+(setq ac/paths/setups (ac/paths/make "lisp/setups"))
+
+(ac/paths/load '(ac/paths/lisp
+                 ac/paths/os
+                 ac/paths/setups))
+
+;; Core
+
+(require 'core)
+
+;; UX
+
+(require 'ux)
+
+;; OS
+
+(require 'os)
+
+;; Setups
+
+(require 'setups)
