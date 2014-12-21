@@ -5,6 +5,9 @@
 (setq line-number-mode t)
 (setq column-number-mode t)
 
+; Turn the damn bell off
+(setq visible-bell 1)
+
 ; Shorten questions
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -65,23 +68,17 @@
 ; Use js2 mode
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx$" . js2-mode))
 (setq-default js2-include-node-externs t)
 (setq-default js2-basic-offset 2)
 
-; User web mode
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.jsx$" . web-mode))
-
-(defun my-web-mode-hook ()
-  "Hook for web-mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-code-indent-offset 2))
-
-(add-hook 'web-mode-hook 'my-web-mode-hook)
-
 ; Haskell mode
+(add-to-list 'exec-path "~/.cabal/bin")
 (add-hook 'haskell-mode-hook 'turn-on-haskell-unicode-input-method)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-decl-scan)
+
+; Idris mode
+(require 'idris-mode)
 
 (provide 'common)

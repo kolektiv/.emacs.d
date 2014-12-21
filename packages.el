@@ -1,17 +1,18 @@
 ; Define additional third party package repositories
 (setq archives
-      '(("marmalade" . "http://marmalade-repo.org/packages/")
-        ("melpa" . "http://melpa.milkbox.net/packages/")))
+      '(("melpa" . "http://melpa.milkbox.net/packages/")
+        ("marmalade" . "http://marmalade-repo.org/packages/")))
 
 ; Define required third party packages
 (setq packages
       '(clojure-mode
 		dired+
 		haskell-mode
+        idris-mode
 		js2-mode
 		markdown-mode
-		sass-mode
-		web-mode))
+        rust-mode
+        sass-mode))
 
 ; Load package.el package management system
 (require 'package)

@@ -1,11 +1,11 @@
 ; Add current Emacs dir to load path
 (add-to-list 'load-path 
-	     user-emacs-directory)
+             user-emacs-directory)
 
 ; Add Emacs OS dir (OS specific settings) to load path
 (add-to-list 'load-path 
-	     (concat user-emacs-directory 
-		     (convert-standard-filename "os/")))
+             (concat user-emacs-directory 
+                     (convert-standard-filename "os/")))
 
 ; Load Common Lisp compatibility functions
 (require 'cl)
