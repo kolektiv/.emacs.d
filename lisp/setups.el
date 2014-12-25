@@ -4,13 +4,11 @@
 
 ;; Archives
 
-(add-to-list
- 'package-archives
- '("marmalade" . "https://marmalade-repo.org/packages/"))
-
-(add-to-list
- 'package-archives
- '("melpa" . "http://melpa.milkbox.net/packages/"))
+(setq package-archives
+      '(("marmalade" . "http://marmalade-repo.org/packages/")
+        ("melpa" . "http://melpa.milkbox.net/packages/")
+        ("org" . "http://orgmode.org/elpa/")
+        ("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;; Initialize
 
