@@ -1,6 +1,6 @@
 ;; Packages
 
-(ac/packages/require 'scala-mode2)
+(ac/packages/require 'scala-mode)
 
 ;; Load
 

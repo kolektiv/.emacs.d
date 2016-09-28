@@ -1,4 +1,6 @@
-;; Commmon Lisp
+;; (package-initialize)
+
+;; Common Lisp
 
 (require 'cl)
 
