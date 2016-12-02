@@ -1,41 +1,154 @@
-;; (package-initialize)
+;;; init.el --- Personal Emacs Configuration
+
+;; Author: Andrew Cherry <andrew@xyncro.com>
+;; Keywords: emacs, init
+;; URL: https://github.com/kolektiv/.emacs.d
+
+;;; Commentary:
+
+;; Personal Emacs configuration, with the various customisations and
+;; tweaks I like.
+
+;;; History:
+
+;; 2016-11-30: Changing to use use-package, and simplifying to single file basis.
+
+;;; Code:
+
+;; Customisation
+
+;; Set the customisation files used by the automatic customisation tooling to
+;; use a separate file to the core init.el to avoid cluttering this file with
+;; auto-generated cruft.
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
+;; Theme
+
+;; Load my custom theme (dark variant), without prompting as it's theoretically
+;; trusted local code.
+
+(load-theme 'kolektiv-dark t)
+
+;; Interface
+
+;; Set preferences for UI options, including the removal of surplus chrome,
+;; toolbars, and other graphical widgets which duplicate functionality better
+;; used via keyboard interaction.
+
+(setq inhibit-splash-screen t)
+
+(blink-cursor-mode 0)
+(fringe-mode 16)
+(scroll-bar-mode -1)
+(tool-bar-mode -1)
+
+(add-to-list 'default-frame-alist (cons 'width 120))
+(add-to-list 'default-frame-alist (cons 'height 60))
+
+;; Editing
+
+;; Set the preferences for global editing to sensible defaults, including line
+;; and column numbers, newline handling, tabs, and any other general text
+;; editing default that arises.
+
+(global-font-lock-mode t)
+
+(setq
+ column-number-mode t
+ line-number-mode t
+ require-final-newline t
+ next-line-add-newlines nil
+ indent-tabs-mode nil)
+
+(setq-default
+ line-spacing 0.2
+ tab-width 4
+ truncate-lines t)
+
+;; Interaction
+
+;; Override some of the default Emacs interactions for more concise alternatives
+;; such as allowing Y or N instead of a full Yes or No response to buffer
+;; interactions.
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;; Backups
+
+;; Override the default Emacs automatic backup behaviour to avoid polluting
+;; working directories with backup and temporary copies of files. Ensure a
+;; sensible level of backup history.
+
+(setq
+ auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+ backup-by-copying t
+ backup-directory-alist `((".*" . ,temporary-file-directory))
+ delete-old-versions t
+ kept-old-versions 2
+ kept-new-versions 10
+ version-control t)
 
 ;; Common Lisp
 
-(require 'cl)
+;; Allow the use of Common Lisp style programming features within Emacs Lisp
+;; where useful.
 
-;; Paths
+(require 'cl-lib)
 
-(defun ac/paths/make (p)
-  (concat user-emacs-directory
-	  (convert-standard-filename p)))
+;; Package Management Infrastructure
 
-(defun ac/paths/add (p)
-  (add-to-list 'load-path (eval p)))
+(require 'package)
 
-(defun ac/paths/load (ps)
-  (mapc 'ac/paths/add ps))
+(eval-when-compile
+  (setq
+   package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
+					  ("org"          . "http://orgmode.org/elpa/")
+					  ("melpa"        . "http://melpa.org/packages/")
+					  ("melpa-stable" . "http://stable.melpa.org/packages/"))
+   package-archive-priorities '(("melpa-stable" . 1))))
 
-(setq ac/paths/lisp (ac/paths/make "lisp"))
-(setq ac/paths/os (ac/paths/make "lisp/os"))
-(setq ac/paths/setups (ac/paths/make "lisp/setups"))
+(package-initialize)
 
-(ac/paths/load '(ac/paths/lisp
-                 ac/paths/os
-                 ac/paths/setups))
+(when (not package-archive-contents)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
-;; Core
+(eval-when-compile
+  (require 'use-package))
 
-(require 'core)
+(require 'diminish)
+(require 'bind-key)
 
-;; UX
+;; Packages
 
-(require 'ux)
+;; Specific packages, required and managed via use-package, adding features and
+;; modes as required.
 
-;; OS
+;; Flycheck
 
-(require 'os)
+(use-package flycheck
+  :ensure t
+  :pin melpa-stable
+  :init
+  (use-package exec-path-from-shell
+	:ensure t
+	:config
+	(exec-path-from-shell-initialize))
+  :config
+  (global-flycheck-mode))
 
-;; Setups
+;; Rainbow Delimiters
 
-(require 'setups)
+(use-package rainbow-delimiters
+  :ensure t
+  :pin melpa-stable
+  :config
+  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+;; Module
+
+(provide 'init)
+
+;;; init.el ends here

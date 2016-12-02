@@ -1,4 +1,4 @@
-About
-=====
+.emacs.d
+========
 
-My basic Emacs setup which travels with me.
+My Emacs setup. Regularly changed...
