@@ -19,7 +19,7 @@
 
 	  (class '((class color) (min-colors 89)))
 
-	  ;; Backgrounds/Surfaces
+	  ;; Backgrounds
 	  
 	  (gray-1-1 "#303030")
       (gray-1+0 "#333333")
@@ -28,7 +28,7 @@
 	  (gray-2+0 "#444444")
 	  (gray-3+0 "#555555")
 
-	  ;; Foregrounds/Characters - Low Contrast
+	  ;; Foregrounds - Low Contrast
 
 	  (gray-4+0 "#444444")
 	  (gray-5+0 "#555555")
@@ -37,7 +37,7 @@
 	  (gray-8+0 "#888888")
 	  (gray-9+0 "#999999")
 
-	  ;; Foregrounds/Characters - High Contrast
+	  ;; Foregrounds - High Contrast
 	  
       (gray-4 "#aaaaaa")
       (gray-5 "#bbbbbb")
@@ -48,6 +48,7 @@
 	  ;; Semantic
 
       (error-1   "#ed381c")
+	  (info-1    "#1dd13b")
 	  (warning-1 "#ed6f1c"))
 
   (custom-theme-set-faces 'kolektiv-dark
@@ -63,16 +64,16 @@
    `(font-lock-comment-delimiter-face   ((,class (:foreground ,gray-4+0))))
    `(font-lock-constant-face            ((,class (:foreground "#dddddd"))))
    `(font-lock-function-name-face       ((,class (:foreground "#eeeeee" :weight normal))))
-   `(font-lock-keyword-face             ((,class (:foreground "#cccccc" :weight normal))))
+   `(font-lock-keyword-face             ((,class (:foreground "#cccccc"))))
    `(font-lock-string-face              ((,class (:foreground "#aaaaaa" :background ,gray-1+1))))
    `(font-lock-type-face                ((,class (:foreground "#eeeeee" :weight normal))))
-   `(font-lock-variable-name-face       ((,class (:foreground "#ffff00"))))
+   `(font-lock-variable-name-face       ((,class (:foreground "#dddddd"))))
 
    ;; Flycheck
 
    `(flycheck-error                     ((,class (:underline ,error-1))))
-   `(flycheck-info                      ((,class (:underline "#00ff00"))))
-   `(flycheck-warning                   ((,class (:underline "#0000ff"))))
+   `(flycheck-info                      ((,class (:underline ,info-1))))
+   `(flycheck-warning                   ((,class (:underline ,warning-1))))
 
    ;; Fringe
 

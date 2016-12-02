@@ -139,6 +139,17 @@
   :config
   (global-flycheck-mode))
 
+;; Magit
+
+(use-package magit
+  :ensure t
+  :pin melpa-stable
+  :bind
+  (("C-x g"   . magit-status)
+   ("C-x M-g" . magit-dispatch-popup))
+  :config
+  (global-magit-file-mode))
+
 ;; Rainbow Delimiters
 
 (use-package rainbow-delimiters
