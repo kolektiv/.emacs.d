@@ -98,15 +98,9 @@
    ;; Fringe
 
    `(fringe                                  ((,class (:background ,gray-1-1 :foreground ,gray-5+0))))
-<<<<<<< HEAD
 
    ;; Minibuffer
 
-=======
-
-   ;; Minibuffer
-
->>>>>>> 53f97e7db56a0a13a7dd0f0f339acd835284bd4a
    `(minibuffer-prompt                       ((,class (:foreground "#aaaaaa" :box (:line-width 5 :color ,gray-1+0)))))
    `(minibuffer-noticeable-prompt            ((,class (:inherit minibuffer-prompt :foreground "#eeeeee"))))
    
@@ -137,13 +131,9 @@
    `(vc-conflict-state                       ((,class (:inherit vc-state-base :foreground ,error-1))))
    `(vc-edited-state                         ((,class (:inherit vc-state-base :foreground ,gray-9+0))))
    `(vc-locally-added-state                  ((,class (:inherit vc-state-base :foreground ,gray-9+0 :slant italic))))
-<<<<<<< HEAD
    `(vc-removed-state                        ((,class (:inherit vc-state-base :foreground ,gray-9+0 :strike-through t))))))
 
 ;; Theme
-=======
-   `(vc-removed-state                        ((,class (:inherit vc-state-base :foreground ,gray-9+0 :strike-through t))))
->>>>>>> 53f97e7db56a0a13a7dd0f0f339acd835284bd4a
 
 (provide-theme 'kolektiv-dark)
 
