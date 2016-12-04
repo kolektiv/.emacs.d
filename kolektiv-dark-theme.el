@@ -19,7 +19,7 @@
 
 	  (class '((class color) (min-colors 89)))
 
-	  ;; Backgrounds
+	  ;; Background
 	  
 	  (gray-1-1 "#303030")
       (gray-1+0 "#333333")
@@ -28,7 +28,7 @@
 	  (gray-2+0 "#444444")
 	  (gray-3+0 "#555555")
 
-	  ;; Foregrounds - Low Contrast
+	  ;; Foreground - Low Contrast
 
 	  (gray-4+0 "#444444")
 	  (gray-5+0 "#555555")
@@ -37,7 +37,7 @@
 	  (gray-8+0 "#888888")
 	  (gray-9+0 "#999999")
 
-	  ;; Foregrounds - High Contrast
+	  ;; Foreground - High Contrast
 	  
       (gray-4 "#aaaaaa")
       (gray-5 "#bbbbbb")
@@ -49,14 +49,31 @@
 
       (error-1   "#ed381c")
 	  (info-1    "#1dd13b")
+	  (success-1 "#1dd13b")
 	  (warning-1 "#ed6f1c"))
 
   (custom-theme-set-faces 'kolektiv-dark
 
    ;; Base
    
+   `(bold                                    ((,class (:weight normal))))
+   `(cursor                                  ((,class (:background "#dddddd"))))
    `(default                                 ((,class (:family "Fira Code" :weight light :height 130 :foreground ,gray-9+0 :background ,gray-1+0))))
- 
+   `(error                                   ((,class (:foreground ,error-1 :weight normal))))
+   `(fringe                                  ((,class (:background ,gray-1-1 :foreground ,gray-6+0))))
+   `(match                                   ((,class (:background "#dddddd"))))
+   `(region                                  ((,class (:background "#222222"))))
+   `(secondary-selection                     ((,class (:background "#111111"))))
+   `(show-paren-match                        ((,class (:background "#cccccc"))))
+   `(success                                 ((,class (:foreground ,success-1 :weight normal))))
+   `(warning                                 ((,class (:foreground ,warning-1 :weight normal))))
+
+   ;; Dired
+
+   `(dired-flagged                           ((,class (:strike-through t))))
+   `(dired-marked                            ((,class (:underline t))))
+   `(dired-symlink                           ((,class (:slant italic))))
+   
    ;; Font Lock
 
    `(font-lock-builtin-face                  ((,class (:foreground "#bbbbbb"))))
@@ -114,10 +131,10 @@
    `(vc-conflict-state                       ((,class (:inherit vc-state-base :foreground ,error-1))))
    `(vc-edited-state                         ((,class (:inherit vc-state-base :foreground ,gray-9+0))))
    `(vc-locally-added-state                  ((,class (:inherit vc-state-base :foreground ,gray-9+0 :slant italic))))
-   `(vc-removed-state                        ((,class (:inherit vc-state-base :foreground ,gray-9+0 :strike-through t))))
+   `(vc-removed-state                        ((,class (:inherit vc-state-base :foreground ,gray-9+0 :strike-through t))))))
 
-   ))
-   
+;; Theme
+
 (provide-theme 'kolektiv-dark)
 
 ;;; kolektiv-dark-theme.el ends here
