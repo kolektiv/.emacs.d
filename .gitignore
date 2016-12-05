@@ -1,6 +1,8 @@
 custom.el
 tramp
 auto-save-list
+helm-adaptive-history
 elpa
+recentf
 url
 *~

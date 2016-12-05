@@ -64,7 +64,7 @@
    `(match                                   ((,class (:background "#dddddd"))))
    `(region                                  ((,class (:background "#222222"))))
    `(secondary-selection                     ((,class (:background "#111111"))))
-   `(show-paren-match                        ((,class (:background "#cccccc"))))
+   `(show-paren-match                        ((,class (:background "#888888"))))
    `(success                                 ((,class (:foreground ,success-1 :weight normal))))
    `(warning                                 ((,class (:foreground ,warning-1 :weight normal))))
 

@@ -67,6 +67,13 @@
 
 ;; ------------------------------------------------------------------------------
 
+;; Core/Dired
+
+(setq-default
+ dired-use-ls-dired nil)
+
+;; ------------------------------------------------------------------------------
+
 ;; Core/Editing
 
 ;; Set the preferences for global editing to sensible defaults, including line
@@ -175,10 +182,39 @@
   :init
   (use-package exec-path-from-shell
 	:ensure t
-	:config
-	(exec-path-from-shell-initialize))
+	:config (exec-path-from-shell-initialize))
+  :config (global-flycheck-mode))
+
+;; ------------------------------------------------------------------------------
+
+;; Packages/Helm
+
+(use-package helm
+  :ensure t
+  :pin melpa-stable
   :config
-  (global-flycheck-mode))
+  (use-package helm-mode
+	:diminish helm-mode
+	:bind
+	(("M-x"     . helm-M-x)
+	 ("C-x C-b" . helm-mini)
+	 ("C-x b"   . helm-buffers-list)
+	 ("C-x C-d" . helm-browse-project)
+	 ("C-x C-f" . helm-find-files))
+	:config
+	(setq
+	 helm-mode-fuzzy-match t
+	 helm-completion-in-region-fuzzy-match t)
+	(helm-mode 1))
+  (use-package helm-adaptive
+	:config (helm-adaptive-mode 1))
+  (use-package helm-ls-git
+	:ensure t
+	:pin melpa-stable)
+  (use-package helm-ring
+	:config (helm-push-mark-mode 1))
+  (use-package helm-utils
+	:config (helm-popup-tip-mode 1)))
 
 ;; ------------------------------------------------------------------------------
 
@@ -187,13 +223,11 @@
 (use-package magit
   :ensure t
   :pin melpa-stable
-  :demand
   :diminish auto-revert-mode
   :bind
   (("C-x g"   . magit-status)
    ("C-x M-g" . magit-dispatch-popup))
-  :config
-  (global-magit-file-mode))
+  :config (global-magit-file-mode))
 
 ;; ------------------------------------------------------------------------------
 
@@ -202,8 +236,7 @@
 (use-package rainbow-delimiters
   :ensure t
   :pin melpa-stable
-  :config
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
 ;; ==============================================================================
 
