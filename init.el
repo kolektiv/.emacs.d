@@ -11,11 +11,11 @@
 
 ;;; History:
 
-;; 2016-11-30: Changing to use use-package, and simplifying to single file basis.
+;; 2016-11-30: Changing to use use-package, and simplifying to single file.
 
 ;;; Code:
 
-;; ==============================================================================
+;; =============================================================================
 
 ;; Core
 
@@ -23,7 +23,7 @@
 ;; thus configured "raw" rather than configured lazily using use-package as
 ;; configured in the latter part of the init file.
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Backups
 
@@ -40,7 +40,7 @@
  kept-new-versions 10
  version-control t)
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Common Lisp
 
@@ -49,12 +49,12 @@
 
 (require 'cl-lib)
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Customisation
 
-;; Settings for custom mode, along with configuration to use a discrete custom.el
-;; file instead of storing customized values within init.el.
+;; Settings for custom mode, along with configuration to use a discrete
+;; custom.el file instead of storing customized values within init.el.
 
 (setq-default
  custom-buffer-done-kill t
@@ -65,14 +65,14 @@
 
 (load custom-file)
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Dired
 
 (setq-default
  dired-use-ls-dired nil)
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Editing
 
@@ -81,6 +81,7 @@
 ;; editing default that arises.
 
 (setq-default
+ indent-tabs-mode nil
  line-spacing 0.2
  tab-width 4
  truncate-lines t
@@ -96,7 +97,7 @@
 (global-font-lock-mode t)
 (show-paren-mode 1)
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Interaction
 
@@ -106,7 +107,7 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Interface
 
@@ -125,7 +126,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Package Management
 
@@ -139,9 +140,9 @@
 (eval-when-compile
   (setq
    package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
-					  ("org"          . "http://orgmode.org/elpa/")
-					  ("melpa"        . "http://melpa.org/packages/")
-					  ("melpa-stable" . "http://stable.melpa.org/packages/"))
+                      ("org"          . "http://orgmode.org/elpa/")
+                      ("melpa"        . "http://melpa.org/packages/")
+                      ("melpa-stable" . "http://stable.melpa.org/packages/"))
    package-archive-priorities '(("melpa-stable" . 1))))
 
 (package-initialize)
@@ -156,7 +157,7 @@
 (require 'diminish)
 (require 'bind-key)
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Core/Theme
 
@@ -165,7 +166,7 @@
 
 (load-theme 'kolektiv-dark t)
 
-;; ==============================================================================
+;; =============================================================================
 
 ;; Packages
 
@@ -178,7 +179,7 @@
 ;; package (for example, ivy completion for projectile is configured in
 ;; projectile).
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Packages/Counsel
 
@@ -200,7 +201,7 @@
   :pin melpa-stable
   :config (counsel-projectile-on))
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Packages/Flycheck
 
@@ -209,11 +210,11 @@
   :pin melpa-stable
   :init
   (use-package exec-path-from-shell
-	:ensure t
-	:config (exec-path-from-shell-initialize))
+    :ensure t
+    :config (exec-path-from-shell-initialize))
   :config (global-flycheck-mode))
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Packages/Ivy
 
@@ -230,7 +231,7 @@
   :bind
   (("C-c C-r" . ivy-resume)))
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Packages/Magit
 
@@ -246,7 +247,7 @@
   (("C-x g"   . magit-status)
    ("C-x M-g" . magit-dispatch-popup)))
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Packages/Projectile
 
@@ -257,13 +258,13 @@
   (setq
    projectile-completion-system 'ivy
    projectile-mode-line '(:eval
-						  (when (ignore-errors (projectile-project-root))
-							(propertize
-							 (format " Project [%s]" (projectile-project-name))
-							 'face 'projectile-mode-line))))
+                          (when (ignore-errors (projectile-project-root))
+                            (propertize
+                             (format " Project [%s]" (projectile-project-name))
+                             'face 'projectile-mode-line))))
   (projectile-global-mode))
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Packages/Rainbow Delimiters
 
@@ -272,7 +273,7 @@
   :pin melpa-stable
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Packages/Swiper
 
@@ -280,9 +281,9 @@
   :ensure t
   :pin melpa-stable
   :bind
-  (("C-s"     . swiper)))
+  (("C-s" . swiper)))
 
-;; ==============================================================================
+;; =============================================================================
 
 ;; Module
 

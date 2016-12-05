@@ -10,14 +10,14 @@
 
 ;;; Code:
 
-;; ==============================================================================
+;; =============================================================================
 
 ;; Groups and Faces
 
 ;; Custom faces and groups are defined where applicable, due to the need for
 ;; more granularity of control over some package faces.
 
-;; ------------------------------------------------------------------------------
+;; -----------------------------------------------------------------------------
 
 ;; Projectile
 
@@ -31,7 +31,7 @@
   "Face used for projectile-mode-line information."
   :group 'projectile-faces)
 
-;; ==============================================================================
+;; =============================================================================
 
 ;; Theme
 
@@ -40,42 +40,42 @@
 
 (let (
 
-	  ;; Specifications
+      ;; Specifications
 
-	  (class '((class color) (min-colors 89)))
+      (class '((class color) (min-colors 89)))
 
-	  ;; Background
-	  
-	  (gray-1-1 "#303030")
+      ;; Background
+
+      (gray-1-1 "#303030")
       (gray-1+0 "#333333")
-	  (gray-1+1 "#3a3a3a")
+      (gray-1+1 "#3a3a3a")
       (gray-1+2 "#3f3f3f")
-	  (gray-2+0 "#444444")
-	  (gray-3+0 "#555555")
+      (gray-2+0 "#444444")
+      (gray-3+0 "#555555")
 
-	  ;; Foreground - Low Contrast
+      ;; Foreground - Low Contrast
 
-	  (gray-4+0 "#444444")
-	  (gray-5+0 "#555555")
-	  (gray-6+0 "#666666")
-	  (gray-7+0 "#777777")
-	  (gray-8+0 "#888888")
-	  (gray-9+0 "#999999")
+      (gray-4+0 "#444444")
+      (gray-5+0 "#555555")
+      (gray-6+0 "#666666")
+      (gray-7+0 "#777777")
+      (gray-8+0 "#888888")
+      (gray-9+0 "#999999")
 
-	  ;; Foreground - High Contrast
-	  
+      ;; Foreground - High Contrast
+
       (gray-4 "#aaaaaa")
       (gray-5 "#bbbbbb")
       (gray-6 "#cccccc")
       (gray-7 "#dddddd")
       (gray-8 "#eeeeee")
 
-	  ;; Semantic
+      ;; Semantic
 
       (error-1   "#ed381c")
-	  (info-1    "#1dd13b")
-	  (success-1 "#1dd13b")
-	  (warning-1 "#ed6f1c"))
+      (info-1    "#1dd13b")
+      (success-1 "#1dd13b")
+      (warning-1 "#ed6f1c"))
 
   (custom-theme-set-faces 'kolektiv-dark
 
@@ -128,9 +128,9 @@
 
    `(minibuffer-prompt                       ((,class (:foreground "#aaaaaa" :box (:line-width 5 :color ,gray-1+0)))))
    `(minibuffer-noticeable-prompt            ((,class (:inherit minibuffer-prompt :foreground "#eeeeee"))))
-   
+
    ;; Mode Line
-   
+
    `(mode-line                               ((,class (:foreground ,gray-7+0 :background ,gray-2+0 :box (:line-width 5 :color ,gray-2+0)))))
    `(mode-line-buffer-id                     ((,class (:foreground "#dddddd" :weight light))))
    `(mode-line-emphasis                      ((,class (:foreground "#ffffff" :weight normal))))
@@ -140,7 +140,7 @@
    ;; Projectile
 
    `(projectile-mode-line                    ((,class (:foreground "#999999"))))
-   
+
    ;; Rainbow Delimiters
 
    `(rainbow-delimiters-depth-1-face         ((,class (:foreground ,gray-5+0))))
