@@ -10,6 +10,31 @@
 
 ;;; Code:
 
+;; ==============================================================================
+
+;; Groups and Faces
+
+;; Custom faces and groups are defined where applicable, due to the need for
+;; more granularity of control over some package faces.
+
+;; ------------------------------------------------------------------------------
+
+;; Projectile
+
+(defgroup projectile-faces nil
+  "Font-lock faces for projectile."
+  :group 'projectile
+  :group 'faces)
+
+(defface projectile-mode-line
+  '((t :inherit mode-line))
+  "Face used for projectile-mode-line information."
+  :group 'projectile-faces)
+
+;; ==============================================================================
+
+;; Theme
+
 (deftheme kolektiv-dark
   "Personal Theme (Dark)")
 
@@ -112,6 +137,10 @@
    `(mode-line-highlight                     ((,class (:background ,gray-3+0 :box (:line-width 5 :color ,gray-3+0)))))
    `(mode-line-inactive                      ((,class (:inherit mode-line :background ,gray-1+2 :box (:line-width 5 :color ,gray-1+2)))))
 
+   ;; Projectile
+
+   `(projectile-mode-line                    ((,class (:foreground "#999999"))))
+   
    ;; Rainbow Delimiters
 
    `(rainbow-delimiters-depth-1-face         ((,class (:foreground ,gray-5+0))))
@@ -133,7 +162,9 @@
    `(vc-locally-added-state                  ((,class (:inherit vc-state-base :foreground ,gray-9+0 :slant italic))))
    `(vc-removed-state                        ((,class (:inherit vc-state-base :foreground ,gray-9+0 :strike-through t))))))
 
-;; Theme
+;; =============================================================================
+
+;; Provide
 
 (provide-theme 'kolektiv-dark)
 

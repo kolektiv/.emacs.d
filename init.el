@@ -170,7 +170,35 @@
 ;; Packages
 
 ;; Specific packages, required and managed via use-package, adding features and
-;; modes as required.
+;; modes as required. Extensions to specific packages (for example, counsel and
+;; counsel-projectile) are included as part of the main "parent" package where
+;; appropriate.
+
+;; Configuration of packages *used by* other packages is located in the using
+;; package (for example, ivy completion for projectile is configured in
+;; projectile).
+
+;; ------------------------------------------------------------------------------
+
+;; Packages/Counsel
+
+(use-package counsel
+  :ensure t
+  :pin melpa-stable
+  :diminish counsel-mode
+  :config (counsel-mode)
+  :bind
+  (("M-x"     . counsel-M-x)
+   ("C-x C-f" . counsel-find-file)
+   ("C-c g"   . counsel-git)
+   ("C-c j"   . counsel-git-grep)
+   ("C-c k"   . counsel-ag)
+   ("C-x l"   . counsel-locate)))
+
+(use-package counsel-projectile
+  :ensure t
+  :pin melpa-stable
+  :config (counsel-projectile-on))
 
 ;; ------------------------------------------------------------------------------
 
@@ -187,34 +215,20 @@
 
 ;; ------------------------------------------------------------------------------
 
-;; Packages/Helm
+;; Packages/Ivy
 
-(use-package helm
+(use-package ivy
   :ensure t
   :pin melpa-stable
+  :diminish ivy-mode
   :config
-  (use-package helm-mode
-	:diminish helm-mode
-	:bind
-	(("M-x"     . helm-M-x)
-	 ("C-x C-b" . helm-mini)
-	 ("C-x b"   . helm-buffers-list)
-	 ("C-x C-d" . helm-browse-project)
-	 ("C-x C-f" . helm-find-files))
-	:config
-	(setq
-	 helm-mode-fuzzy-match t
-	 helm-completion-in-region-fuzzy-match t)
-	(helm-mode 1))
-  (use-package helm-adaptive
-	:config (helm-adaptive-mode 1))
-  (use-package helm-ls-git
-	:ensure t
-	:pin melpa-stable)
-  (use-package helm-ring
-	:config (helm-push-mark-mode 1))
-  (use-package helm-utils
-	:config (helm-popup-tip-mode 1)))
+  (setq
+   ivy-count-format "(%d/%d) "
+   ivy-use-virtual-buffers t
+   ivy-wrap t)
+  (ivy-mode 1)
+  :bind
+  (("C-c C-r" . ivy-resume)))
 
 ;; ------------------------------------------------------------------------------
 
@@ -224,10 +238,30 @@
   :ensure t
   :pin melpa-stable
   :diminish auto-revert-mode
+  :config
+  (setq
+   magit-completing-read-function 'ivy-completing-read)
+  (global-magit-file-mode)
   :bind
   (("C-x g"   . magit-status)
-   ("C-x M-g" . magit-dispatch-popup))
-  :config (global-magit-file-mode))
+   ("C-x M-g" . magit-dispatch-popup)))
+
+;; ------------------------------------------------------------------------------
+
+;; Packages/Projectile
+
+(use-package projectile
+  :ensure t
+  :pin melpa-stable
+  :config
+  (setq
+   projectile-completion-system 'ivy
+   projectile-mode-line '(:eval
+						  (when (ignore-errors (projectile-project-root))
+							(propertize
+							 (format " Project [%s]" (projectile-project-name))
+							 'face 'projectile-mode-line))))
+  (projectile-global-mode))
 
 ;; ------------------------------------------------------------------------------
 
@@ -237,6 +271,16 @@
   :ensure t
   :pin melpa-stable
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+
+;; ------------------------------------------------------------------------------
+
+;; Packages/Swiper
+
+(use-package swiper
+  :ensure t
+  :pin melpa-stable
+  :bind
+  (("C-s"     . swiper)))
 
 ;; ==============================================================================
 
