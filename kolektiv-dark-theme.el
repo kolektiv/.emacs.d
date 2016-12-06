@@ -85,11 +85,13 @@
    `(cursor                                  ((,class (:background "#dddddd"))))
    `(default                                 ((,class (:family "Fira Code" :weight light :height 130 :foreground ,gray-9+0 :background ,gray-1+0))))
    `(error                                   ((,class (:foreground ,error-1 :weight normal))))
+   `(fixed-pitch                             ((,class (:inherit default))))
    `(fringe                                  ((,class (:background ,gray-1-1 :foreground ,gray-6+0))))
-   `(match                                   ((,class (:background "#dddddd"))))
+   `(highlight                               ((,class (:background "#aaaaaa" :foreground "#333333" :weight light))))
+   `(isearch                                 ((,class (:background "#ffffff" :foreground "#333333" :weight light))))
+   `(match                                   ((,class (:background "#cccccc" :foreground "#333333" :weight light))))
    `(region                                  ((,class (:background "#222222"))))
    `(secondary-selection                     ((,class (:background "#111111"))))
-   `(show-paren-match                        ((,class (:background "#888888"))))
    `(success                                 ((,class (:foreground ,success-1 :weight normal))))
    `(warning                                 ((,class (:foreground ,warning-1 :weight normal))))
 
@@ -124,6 +126,21 @@
 
    `(fringe                                  ((,class (:background ,gray-1-1 :foreground ,gray-5+0))))
 
+   ;; Ivy
+
+   `(ivy-action                              ((,class (:inherit default :foreground "#ffff00"))))
+   `(ivy-confirm-face                        ((,class (:inherit default :foreground "#ff00ff"))))
+   `(ivy-current-match                       ((,class (:background "#eeeeee" :foreground "#333333" :weight light))))
+   `(ivy-match-required-face                 ((,class (:foreground ,warning-1 :weight light))))
+   `(ivy-minibuffer-match-face-1             ((,class (:background "#aaaaaa" :foreground "#333333" :weight light))))
+   `(ivy-minibuffer-match-face-2             ((,class (:background "#888888" :foreground "#333333" :weight light))))
+   `(ivy-minibuffer-match-face-3             ((,class (:background "#777777" :foreground "black" :weight light))))
+   `(ivy-minibuffer-match-face-4             ((,class (:background "#555555" :foreground "#333333" :weight light))))
+   `(ivy-modified-buffer                     ((,class (:foreground "#dddddd" :weight normal))))
+   `(ivy-remote                              ((,class (:foreground "#aaaaaa" :underline "#666666" :weight light))))
+   `(ivy-subdir                              ((,class (:foreground "#666666" :weight light :underline "#666666"))))
+   `(ivy-virtual                             ((,class (:foreground "#666666" :weight light))))
+   
    ;; Minibuffer
 
    `(minibuffer-prompt                       ((,class (:foreground "#aaaaaa" :box (:line-width 5 :color ,gray-1+0)))))
@@ -136,6 +153,11 @@
    `(mode-line-emphasis                      ((,class (:foreground "#ffffff" :weight normal))))
    `(mode-line-highlight                     ((,class (:background ,gray-3+0 :box (:line-width 5 :color ,gray-3+0)))))
    `(mode-line-inactive                      ((,class (:inherit mode-line :background ,gray-1+2 :box (:line-width 5 :color ,gray-1+2)))))
+
+   ;; Paren Showing
+
+   `(show-paren-match                        ((,class (:background "#888888"))))
+   `(show-paren-mismatch                     ((,class (:foreground ,warning-1))))
 
    ;; Projectile
 
@@ -159,7 +181,7 @@
    `(vc-state-base                           ((,class (:foreground ,gray-6+0))))
    `(vc-conflict-state                       ((,class (:inherit vc-state-base :foreground ,error-1))))
    `(vc-edited-state                         ((,class (:inherit vc-state-base :foreground ,gray-9+0))))
-   `(vc-locally-added-state                  ((,class (:inherit vc-state-base :foreground ,gray-9+0 :slant italic))))
+   `(vc-locally-added-state                  ((,class (:inherit vc-state-base :foreground ,gray-9+0 :underline ,gray-9+0))))
    `(vc-removed-state                        ((,class (:inherit vc-state-base :foreground ,gray-9+0 :strike-through t))))))
 
 ;; =============================================================================

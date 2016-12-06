@@ -224,7 +224,7 @@
   :diminish ivy-mode
   :config
   (setq
-   ivy-count-format "(%d/%d) "
+   ivy-count-format "[%d/%d] "
    ivy-use-virtual-buffers t
    ivy-wrap t)
   (ivy-mode 1)
