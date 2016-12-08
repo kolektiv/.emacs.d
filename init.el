@@ -161,8 +161,11 @@
 
 ;; Core/Theme
 
-;; Load the kolektiv custom theme (dark variant), without prompting as it's
-;; theoretically trusted local code.
+;; Add local themes to the custom theme load path, then load the kolektiv custom
+;; theme (dark variant) without prompting (as it's theoretically trusted local
+;; code).
+
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
 (load-theme 'kolektiv-dark t)
 
@@ -182,6 +185,10 @@
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Counsel
+
+;; Better M-x and related functions, using the underlying Ivy support for better
+;; completion modes. Light and effective. Projectile integration is also added
+;; to support Ivy/Counsel based find, etc. in projectile-mode.
 
 (use-package counsel
   :ensure t
@@ -203,16 +210,58 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Ensime
+
+;; High level Scala mode, integrating with the external Ensime engine providing
+;; more advanced code analysis, completion, checking, etc. than the purely
+;; syntactical analysis availble from the more basic scala-mode (on top of which
+;; Ensime is built).
+
+(use-package ensime
+  :disabled t
+  :ensure t
+  :pin melpa-stable)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Exec Path From Shell
+
+;; Ensure that the path is initialized from environment settings defined and
+;; configured by the appropriate shell.
+
+(use-package exec-path-from-shell
+  :ensure t
+  :pin melpa-stable
+  :demand t
+  :config (exec-path-from-shell-initialize))
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Flycheck
+
+;; Integrates external checking processes with buffer editing, providing
+;; in-place warning, error, etc. notification via highlighting and tooltips.
 
 (use-package flycheck
   :ensure t
   :pin melpa-stable
-  :init
-  (use-package exec-path-from-shell
-    :ensure t
-    :config (exec-path-from-shell-initialize))
   :config (global-flycheck-mode))
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Flx
+
+(use-package flx
+  :ensure t
+  :pin melpa-stable)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/HCL
+
+(use-package hcl-mode
+  :ensure t
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
@@ -224,7 +273,10 @@
   :diminish ivy-mode
   :config
   (setq
-   ivy-count-format "[%d/%d] "
+   ivy-count-format "(%d/%d) "
+   ivy-format-function 'ivy-format-function-line
+   ivy-initial-inputs-alist nil
+   ivy-re-builders-alist '((t . ivy--regex-fuzzy))
    ivy-use-virtual-buffers t
    ivy-wrap t)
   (ivy-mode 1)
@@ -238,6 +290,7 @@
 (use-package magit
   :ensure t
   :pin melpa-stable
+  :demand t
   :diminish auto-revert-mode
   :config
   (setq
@@ -260,7 +313,7 @@
    projectile-mode-line '(:eval
                           (when (ignore-errors (projectile-project-root))
                             (propertize
-                             (format " Project [%s]" (projectile-project-name))
+                             (format " Project[%s]" (projectile-project-name))
                              'face 'projectile-mode-line))))
   (projectile-global-mode))
 
@@ -275,6 +328,25 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/SBT
+
+(use-package sbt-mode
+  :ensure t
+  :pin melpa-stable
+  :commands sbt-start sbt-command)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Scala
+
+(use-package scala-mode
+  :ensure t
+  :pin melpa-stable
+  :interpreter
+  ("scala" . scala-mode))
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Swiper
 
 (use-package swiper
@@ -282,6 +354,14 @@
   :pin melpa-stable
   :bind
   (("C-s" . swiper)))
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Terraform
+
+(use-package terraform-mode
+  :ensure t
+  :pin melpa-stable)
 
 ;; =============================================================================
 

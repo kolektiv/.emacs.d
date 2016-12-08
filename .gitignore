@@ -2,6 +2,7 @@ custom.el
 tramp
 auto-save-list
 elpa
+ensime
 *projectile*
 *recentf*
 url
