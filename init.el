@@ -251,6 +251,9 @@
 
 ;; Packages/Flx
 
+;; Fuzzy matching, used by Ivy and Counsel for the fuzzy search preferred for
+;; general usage.
+
 (use-package flx
   :ensure t
   :pin melpa-stable)
@@ -259,6 +262,8 @@
 
 ;; Packages/HCL
 
+;; Hashicorp Configuration Language mode, highlighting basic HCL.
+
 (use-package hcl-mode
   :ensure t
   :pin melpa-stable)
@@ -266,6 +271,10 @@
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Ivy
+
+;; Ivy completion matching framework, underlying the Counsel and Swiper
+;; implementations. Configured to taste, particularly around the fuzzy matching
+;; approach, using flx as the underlying provider.
 
 (use-package ivy
   :ensure t
@@ -286,6 +295,10 @@
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Magit
+
+;; Powerful and comprehensive Git porcelain avoiding the need to move outside of
+;; Emacs for version control management. Integrated with Ivy and enabled
+;; globally.
 
 (use-package magit
   :ensure t
