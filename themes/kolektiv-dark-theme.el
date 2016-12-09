@@ -145,6 +145,10 @@
    `(flycheck-info                           ((,class (:underline ,info-1))))
    `(flycheck-warning                        ((,class (:underline ,warning-1))))
 
+   ;; Git
+
+   `(git-commit-summary                      ((,class (:foreground ,fg-a+3 :weight light))))
+
    ;; Ivy
 
    `(ivy-action                              ((,class (:inherit default :foreground "#ffff00"))))
@@ -159,6 +163,17 @@
    `(ivy-remote                              ((,class (:inherit default :foreground ,fg-a+1 :underline ,fg-a-3))))
    `(ivy-subdir                              ((,class (:inherit default :foreground ,fg-a-3 :underline t))))
    `(ivy-virtual                             ((,class (:inherit default :foreground ,fg-a-3))))
+
+   ;; Magit
+
+   `(magit-diff-file-heading                 ((,class (:foreground ,fg-a+0))))
+   `(magit-diff-file-heading-highlight       ((,class (:foreground ,fg-b+0 :background ,bg-b+3))))
+   `(magit-popup-disabled-argument           ((,class (:foreground ,fg-a-1 :strike-through t))))
+   `(magit-popup-key                         ((,class (:foreground ,fg-a+2))))
+   `(magit-section-heading                   ((,class (:foreground ,fg-a-2 :weight light :underline t))))
+   `(magit-section-heading-selection         ((,class (:inherit magit-section-heading :foreground ,fg-a+1))))
+   `(magit-section-highlight                 ((,class (:background ,bg-a+1))))
+   `(magit-section-secondary-heading         ((,class (:inherit magit-section-header :underline nil))))
 
    ;; Paren Showing
 
