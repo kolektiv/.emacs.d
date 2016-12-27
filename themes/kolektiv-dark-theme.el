@@ -124,6 +124,27 @@
    `(dired-marked                            ((,class (:inherit default :underline t))))
    `(dired-symlink                           ((,class (:inherit default :slant italic))))
 
+   ;; ERC
+
+   `(erc-action-face                         ((,class (:weight normal))))
+   `(erc-bold-face                           ((,class (:weight normal))))
+   `(erc-button                              ((,class (:weight normal))))
+   `(erc-current-nick-face                   ((,class (:inherit font-lock-constant-face :underline t))))
+   `(erc-dangerous-host-face                 ((,class (:inherit warning))))
+   `(erc-direct-msg-face                     ((,class (:inherit erc-default-face))))
+   `(erc-error-face                          ((,class (:inherit error))))
+   `(erc-fool-face                           ((,class (:inherit font-lock-comment-delimiter-face))))
+   `(erc-input-face                          ((,class (:inherit font-lock-type-face))))
+   `(erc-keyword-face                        ((,class (:inherit success))))
+   `(erc-my-nick-face                        ((,class (:inherit font-lock-type-face :underline t))))
+   `(erc-my-nick-prefix-face                 ((,class (:inherit erc-nick-default-face))))
+   `(erc-nick-default-face                   ((,class (:inherit font-lock-keyword-face))))
+   `(erc-nick-msg-face                       ((,class (:inherit font-lock-type-face))))
+   `(erc-nick-prefix-face                    ((,class (:inherit erc-nick-default-face))))
+   `(erc-notice-face                         ((,class (:inherit font-lock-comment-face))))
+   `(erc-prompt-face                         ((,class (:inherit font-lock-type-face :weight light))))
+   `(erc-timestamp-face                      ((,class (:inherit font-lock-comment-delimiter-face))))
+   
    ;; Font Lock
 
    `(font-lock-builtin-face                  ((,class (:foreground ,fg-a+2))))
