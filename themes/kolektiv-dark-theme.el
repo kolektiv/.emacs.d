@@ -144,7 +144,7 @@
    `(erc-notice-face                         ((,class (:inherit font-lock-comment-face))))
    `(erc-prompt-face                         ((,class (:inherit font-lock-type-face :weight light))))
    `(erc-timestamp-face                      ((,class (:inherit font-lock-comment-delimiter-face))))
-   
+
    ;; Font Lock
 
    `(font-lock-builtin-face                  ((,class (:foreground ,fg-a+2))))
