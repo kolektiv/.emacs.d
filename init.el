@@ -100,6 +100,17 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Core/ERC
+
+;; Set the preferences for ERC to suitable defaults.
+
+(setq-default
+ erc-autoaway-mode t
+ erc-away-nickname "kolektiv.afk"
+ erc-nick "kolektiv")
+
+;; -----------------------------------------------------------------------------
+
 ;; Core/Interaction
 
 ;; Override some of the default Emacs interactions for more concise alternatives
