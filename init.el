@@ -207,7 +207,10 @@
   :ensure t
   :pin melpa-stable
   :diminish counsel-mode
-  :config (counsel-mode)
+  :config
+  (add-to-list 'ivy-ignore-buffers "\\*magit")
+  (add-to-list 'ivy-ignore-buffers "\\*Flycheck")
+  (counsel-mode)
   :bind
   (("M-x"     . counsel-M-x)
    ("C-x C-f" . counsel-find-file)
