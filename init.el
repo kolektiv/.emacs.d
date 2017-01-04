@@ -128,7 +128,8 @@
 ;; used via keyboard interaction.
 
 (setq
- inhibit-splash-screen t)
+ inhibit-splash-screen t
+ ring-bell-function 'ignore)
 
 (add-to-list 'default-frame-alist (cons 'width 120))
 (add-to-list 'default-frame-alist (cons 'height 60))
