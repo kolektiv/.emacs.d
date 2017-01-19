@@ -261,7 +261,8 @@
 (use-package flycheck
   :ensure t
   :pin melpa-stable
-  :config (global-flycheck-mode))
+  :config
+  (global-flycheck-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -389,6 +390,14 @@
 ;; Packages/Terraform
 
 (use-package terraform-mode
+  :ensure t
+  :pin melpa-stable)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/YAML
+
+(use-package yaml-mode
   :ensure t
   :pin melpa-stable)
 
