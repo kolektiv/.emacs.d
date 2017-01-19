@@ -196,6 +196,12 @@
    `(magit-section-highlight                 ((,class (:background ,bg-a+1))))
    `(magit-section-secondary-heading         ((,class (:inherit magit-section-header :underline nil))))
 
+   ;; Markdown
+
+   `(markdown-bold-face                      ((,class (:inherit font-lock-variable-name-face))))
+   `(markdown-header-face                    ((,class (:inherit font-lock-function-name-face))))
+   `(markdown-metadata-key-face              ((,class (:inherit font-lock-variable-name-face))))
+   
    ;; Paren Showing
 
    `(show-paren-match                        ((,class (:background ,bg-b-2))))
