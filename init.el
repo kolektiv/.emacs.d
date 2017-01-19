@@ -261,8 +261,7 @@
 (use-package flycheck
   :ensure t
   :pin melpa-stable
-  :config
-  (global-flycheck-mode))
+  :config (global-flycheck-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -298,16 +297,14 @@
   :pin melpa-stable
   :diminish ivy-mode
   :config
-  (setq
-   ivy-count-format "(%d/%d) "
-   ivy-format-function 'ivy-format-function-line
-   ivy-initial-inputs-alist nil
-   ivy-re-builders-alist '((t . ivy--regex-fuzzy))
-   ivy-use-virtual-buffers t
-   ivy-wrap t)
+  (setq ivy-count-format "(%d/%d) "
+        ivy-format-function 'ivy-format-function-line
+        ivy-initial-inputs-alist nil
+        ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+        ivy-use-virtual-buffers t
+        ivy-wrap t)
   (ivy-mode 1)
-  :bind
-  (("C-c C-r" . ivy-resume)))
+  :bind (("C-c C-r" . ivy-resume)))
 
 ;; -----------------------------------------------------------------------------
 
@@ -323,13 +320,26 @@
   :demand t
   :diminish auto-revert-mode
   :config
-  (setq
-   magit-completing-read-function 'ivy-completing-read)
+  (setq magit-completing-read-function 'ivy-completing-read)
   (global-magit-file-mode)
   :bind
   (("C-x g"   . magit-status)
    ("C-x M-g" . magit-dispatch-popup)))
 
+;; -----------------------------------------------------------------------------
+
+;; Packages/Markdown
+
+(use-package markdown-mode
+  :ensure t
+  :pin melpa-stable
+  :commands (markdown-mode gfm-mode)
+  :config (setq markdown-command "multimarkdown")
+  :mode
+  (("README\\.md\\'" . gfm-mode)
+   ("\\.md\\'"       . markdown-mode)
+   ("\\.markdown\\'" . markdown-mode)))
+  
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Projectile
@@ -372,8 +382,7 @@
 (use-package scala-mode
   :ensure t
   :pin melpa-stable
-  :interpreter
-  ("scala" . scala-mode))
+  :interpreter ("scala" . scala-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -382,8 +391,7 @@
 (use-package swiper
   :ensure t
   :pin melpa-stable
-  :bind
-  (("C-s" . swiper)))
+  :bind (("C-s" . swiper)))
 
 ;; -----------------------------------------------------------------------------
 
