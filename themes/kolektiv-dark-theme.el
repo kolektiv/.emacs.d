@@ -201,6 +201,16 @@
    `(markdown-bold-face                      ((,class (:inherit font-lock-variable-name-face))))
    `(markdown-header-face                    ((,class (:inherit font-lock-function-name-face))))
    `(markdown-metadata-key-face              ((,class (:inherit font-lock-variable-name-face))))
+
+   ;; Outline
+
+   `(outline-1                               ((,class (:foreground ,fg-a+5 :weight light))))
+   `(outline-2                               ((,class (:foreground ,fg-a+4 :weight light))))
+   `(outline-3                               ((,class (:foreground ,fg-a+3 :weight light))))
+   `(outline-4                               ((,class (:foreground ,fg-a+2 :weight light))))
+   `(outline-5                               ((,class (:foreground ,fg-a+1 :weight light))))
+   `(outline-6                               ((,class (:foreground ,fg-a+0 :weight light))))
+   `(outline-7                               ((,class (:foreground ,fg-a-1 :weight light))))
    
    ;; Paren Showing
 

@@ -32,14 +32,13 @@
 ;; working directories with backup and temporary copies of files. Ensure a
 ;; sensible level of backup history.
 
-(setq
- auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
- backup-by-copying t
- backup-directory-alist `((".*" . ,temporary-file-directory))
- delete-old-versions t
- kept-old-versions 2
- kept-new-versions 10
- version-control t)
+(setq auto-save-file-name-transforms `((".*" ,temporary-file-directory t))
+      backup-by-copying t
+      backup-directory-alist `((".*" . ,temporary-file-directory))
+      delete-old-versions t
+      kept-old-versions 2
+      kept-new-versions 10
+      version-control t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -57,21 +56,12 @@
 ;; Settings for custom mode, along with configuration to use a discrete
 ;; custom.el file instead of storing customized values within init.el.
 
-(setq-default
- custom-buffer-done-kill t
- custom-buffer-indent 4)
+(setq-default custom-buffer-done-kill t
+              custom-buffer-indent 4)
 
-(setq
- custom-file "~/.emacs.d/custom.el")
+(setq custom-file "~/.emacs.d/custom.el")
 
 (load custom-file)
-
-;; -----------------------------------------------------------------------------
-
-;; Core/Dired
-
-(setq-default
- dired-use-ls-dired nil)
 
 ;; -----------------------------------------------------------------------------
 
@@ -81,22 +71,22 @@
 ;; and column numbers, newline handling, tabs, and any other general text
 ;; editing default that arises.
 
-(setq-default
- indent-tabs-mode nil
- line-spacing 0.2
- tab-width 4
- truncate-lines t
- show-paren-delay 0)
+(setq-default indent-tabs-mode nil
+              line-spacing 0.2
+              tab-width 4
+              truncate-lines t
+              show-paren-delay 0)
 
-(setq
- column-number-mode t
- line-number-mode t
- require-final-newline t
- next-line-add-newlines nil
- indent-tabs-mode nil)
+(setq column-number-mode t
+      line-number-mode t
+      require-final-newline t
+      next-line-add-newlines nil
+      indent-tabs-mode nil)
 
-(global-font-lock-mode t)
+(delete-selection-mode 1)
+(global-font-lock-mode 1)
 (show-paren-mode 1)
+(transient-mark-mode 1)
 
 ;; -----------------------------------------------------------------------------
 
@@ -104,10 +94,9 @@
 
 ;; Set the preferences for ERC to suitable defaults.
 
-(setq-default
- erc-autoaway-mode t
- erc-away-nickname "kolektiv.afk"
- erc-nick "kolektiv")
+(setq-default erc-autoaway-mode t
+              erc-away-nickname "kolektiv.afk"
+              erc-nick "kolektiv")
 
 ;; -----------------------------------------------------------------------------
 
@@ -127,9 +116,8 @@
 ;; toolbars, and other graphical widgets which duplicate functionality better
 ;; used via keyboard interaction.
 
-(setq
- inhibit-splash-screen t
- ring-bell-function 'ignore)
+(setq inhibit-splash-screen t
+      ring-bell-function 'ignore)
 
 (add-to-list 'default-frame-alist (cons 'width 120))
 (add-to-list 'default-frame-alist (cons 'height 60))
@@ -151,12 +139,12 @@
 (require 'package)
 
 (eval-when-compile
-  (setq
-   package-archives '(("gnu"          . "http://elpa.gnu.org/packages/")
-                      ("org"          . "http://orgmode.org/elpa/")
-                      ("melpa"        . "http://melpa.org/packages/")
-                      ("melpa-stable" . "http://stable.melpa.org/packages/"))
-   package-archive-priorities '(("melpa-stable" . 1))))
+  (setq package-archives
+        '(("gnu"          . "http://elpa.gnu.org/packages/")
+          ("org"          . "http://orgmode.org/elpa/")
+          ("melpa"        . "http://melpa.org/packages/")
+          ("melpa-stable" . "http://stable.melpa.org/packages/"))
+        package-archive-priorities '(("melpa-stable" . 1))))
 
 (package-initialize)
 
@@ -204,25 +192,37 @@
 ;; to support Ivy/Counsel based find, etc. in projectile-mode.
 
 (use-package counsel
-  :ensure t
-  :pin melpa-stable
-  :diminish counsel-mode
-  :config
-  (add-to-list 'ivy-ignore-buffers "\\*magit")
-  (add-to-list 'ivy-ignore-buffers "\\*Flycheck")
-  (counsel-mode)
   :bind
   (("M-x"     . counsel-M-x)
    ("C-x C-f" . counsel-find-file)
    ("C-c g"   . counsel-git)
    ("C-c j"   . counsel-git-grep)
    ("C-c k"   . counsel-ag)
-   ("C-x l"   . counsel-locate)))
+   ("C-x l"   . counsel-locate))
+  :config (counsel-mode)
+  :diminish counsel-mode
+  :ensure t
+  :pin melpa-stable)
 
 (use-package counsel-projectile
+  :config (counsel-projectile-on)
   :ensure t
-  :pin melpa-stable
-  :config (counsel-projectile-on))
+  :pin melpa-stable)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Dired[+]
+
+(use-package dired
+  :config (setq dired-use-ls-dired nil))
+
+(use-package dired+
+  :ensure t
+  :init
+  (progn
+    (setq-default diredp-hide-details-initially-flag nil)
+    (diredp-toggle-find-file-reuse-dir 1))
+  :pin melpa)
 
 ;; -----------------------------------------------------------------------------
 
@@ -246,10 +246,10 @@
 ;; configured by the appropriate shell.
 
 (use-package exec-path-from-shell
-  :ensure t
-  :pin melpa-stable
+  :config (exec-path-from-shell-initialize)
   :demand t
-  :config (exec-path-from-shell-initialize))
+  :ensure t
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
@@ -259,9 +259,9 @@
 ;; in-place warning, error, etc. notification via highlighting and tooltips.
 
 (use-package flycheck
+  :config (global-flycheck-mode)
   :ensure t
-  :pin melpa-stable
-  :config (global-flycheck-mode))
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
@@ -293,18 +293,21 @@
 ;; approach, using flx as the underlying provider.
 
 (use-package ivy
-  :ensure t
-  :pin melpa-stable
-  :diminish ivy-mode
+  :bind ("C-c C-r" . ivy-resume)
   :config
-  (setq ivy-count-format "(%d/%d) "
-        ivy-format-function 'ivy-format-function-line
-        ivy-initial-inputs-alist nil
-        ivy-re-builders-alist '((t . ivy--regex-fuzzy))
-        ivy-use-virtual-buffers t
-        ivy-wrap t)
-  (ivy-mode 1)
-  :bind (("C-c C-r" . ivy-resume)))
+  (progn
+    (setq ivy-count-format "(%d/%d) "
+          ivy-format-function 'ivy-format-function-line
+          ivy-initial-inputs-alist nil
+          ivy-re-builders-alist '((t . ivy--regex-fuzzy))
+          ivy-use-virtual-buffers t
+          ivy-wrap t)
+    (add-to-list 'ivy-ignore-buffers "\\*magit")
+    (add-to-list 'ivy-ignore-buffers "\\*Flycheck")
+    (ivy-mode 1))
+  :diminish ivy-mode
+  :ensure t
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
@@ -315,65 +318,75 @@
 ;; globally.
 
 (use-package magit
-  :ensure t
-  :pin melpa-stable
-  :demand t
-  :diminish auto-revert-mode
-  :config
-  (setq magit-completing-read-function 'ivy-completing-read)
-  (global-magit-file-mode)
   :bind
   (("C-x g"   . magit-status)
-   ("C-x M-g" . magit-dispatch-popup)))
+   ("C-x M-g" . magit-dispatch-popup))
+  :config
+  (progn
+    (setq magit-completing-read-function 'ivy-completing-read)
+    (global-magit-file-mode))
+  :demand t
+  :diminish auto-revert-mode
+  :ensure t
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Markdown
 
 (use-package markdown-mode
-  :ensure t
-  :pin melpa-stable
-  :commands (markdown-mode gfm-mode)
+  :commands (gfm-mode markdown-mode)
   :config (setq markdown-command "multimarkdown")
+  :ensure t
   :mode
   (("README\\.md\\'" . gfm-mode)
    ("\\.md\\'"       . markdown-mode)
-   ("\\.markdown\\'" . markdown-mode)))
+   ("\\.markdown\\'" . markdown-mode))
+  :pin melpa-stable)
   
+;; -----------------------------------------------------------------------------
+
+;; Packages/Org
+
+(use-package org
+  :ensure org-plus-contrib
+  :pin org)
+
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Projectile
 
 (use-package projectile
-  :ensure t
-  :pin melpa-stable
   :config
-  (setq
-   projectile-completion-system 'ivy
-   projectile-mode-line '(:eval
-                          (when (ignore-errors (projectile-project-root))
-                            (propertize
-                             (format " Project[%s]" (projectile-project-name))
-                             'face 'projectile-mode-line))))
-  (projectile-global-mode))
+  (progn
+    (setq projectile-completion-system 'ivy
+          projectile-mode-line
+          '(:eval
+            (when (ignore-errors (projectile-project-root))
+              (propertize
+               (format " Project[%s]" (projectile-project-name))
+               'face 'projectile-mode-line))))
+    (projectile-global-mode))
+  :ensure t
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Rainbow Delimiters
 
 (use-package rainbow-delimiters
+  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
   :ensure t
-  :pin melpa-stable
-  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/SBT
 
 (use-package sbt-mode
+  :commands (sbt-command sbt-start)
   :ensure t
-  :pin melpa-stable
-  :commands sbt-start sbt-command)
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
@@ -381,17 +394,17 @@
 
 (use-package scala-mode
   :ensure t
-  :pin melpa-stable
-  :interpreter ("scala" . scala-mode))
+  :interpreter ("scala" . scala-mode)
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Swiper
 
 (use-package swiper
+  :bind ("C-s" . swiper)
   :ensure t
-  :pin melpa-stable
-  :bind (("C-s" . swiper)))
+  :pin melpa-stable)
 
 ;; -----------------------------------------------------------------------------
 
