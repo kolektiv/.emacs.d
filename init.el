@@ -7,7 +7,8 @@
 ;;; Commentary:
 
 ;; Personal Emacs configuration, with the various customisations and
-;; tweaks I like.
+;; tweaks I like - this configuration should be relatively portable amongst
+;; posix type systems, but makes no effort whatsoever to support Windows.
 
 ;;; History:
 
@@ -206,14 +207,27 @@
 (use-package counsel-projectile
   :config (counsel-projectile-on)
   :ensure t
-  :pin melpa-stable)
+  :pin melpa)
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Dired[+]
 
+;; Dired and Dired+ configuration, including setting Dired to use the Gnu ls
+;; implementation if available (installed as part of coreutils if on a Mac
+;; hopefully). Listing switches are also set to sort directories first.
+
 (use-package dired
-  :config (setq dired-use-ls-dired nil))
+  :config
+  (progn
+    (let ((gls "/usr/local/bin/gls"))
+      (if (file-exists-p gls)
+          (setq insert-directory-program gls)))
+    (setq dired-listing-switches "-lXGh --group-directories-first")))
+
+;; For Dired+, the detailed listing is set as the default, and reuse of a single
+;; Dired buffer is enabled to avoid cluttering Emacs with hundreds of Dired
+;; buffers.
 
 (use-package dired+
   :ensure t

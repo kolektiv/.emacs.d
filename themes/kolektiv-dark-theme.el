@@ -124,6 +124,15 @@
    `(dired-marked                            ((,class (:inherit default :underline t))))
    `(dired-symlink                           ((,class (:inherit default :slant italic))))
 
+   ;; Dired+
+
+   `(diredp-date-time                        ((,class (:inherit default :foreground ,fg-a-4))))
+   `(diredp-dir-heading                      ((,class (:inherit default :foreground ,fg-a-2))))
+   `(diredp-dir-name                         ((,class (:inherit default :foreground ,fg-a-3 :underline t))))
+   `(diredp-file-name                        ((,class (:inherit default :foreground ,fg-a+3))))
+   `(diredp-file-suffix                      ((,class (:inherit default :foreground ,fg-a-4))))
+   `(diredp-number                           ((,class (:inherit default :foreground ,fg-a-1))))
+   
    ;; ERC
 
    `(erc-action-face                         ((,class (:weight normal))))
