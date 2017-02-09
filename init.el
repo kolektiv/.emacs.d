@@ -83,6 +83,7 @@
       next-line-add-newlines nil
       indent-tabs-mode nil)
 
+(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 (delete-selection-mode 1)
 (global-font-lock-mode 1)
 (show-paren-mode 1)
@@ -198,7 +199,7 @@
    ("C-c g"   . counsel-git)
    ("C-c j"   . counsel-git-grep)
    ("C-c k"   . counsel-ag)
-   ("C-x l"   . counsel-locate))
+   ("C-c l"   . counsel-locate))
   :config (counsel-mode)
   :diminish counsel-mode
   :ensure t
@@ -211,18 +212,20 @@
 
 ;; -----------------------------------------------------------------------------
 
-;; Packages/Dired[+]
+;; Packages/Dired
 
-;; Dired and Dired+ configuration, including setting Dired to use the Gnu ls
-;; implementation if available (installed as part of coreutils if on a Mac
-;; hopefully). Listing switches are also set to sort directories first.
+;; Dired and Dired+ configuration, including setting Dired to use the GNU ls
+;; implementation if running on OS X and the implementation has been installed
+;; as part of coreutils. Listing switches are also set to sort directories
+;; first.
 
 (use-package dired
   :config
   (progn
-    (let ((gls "/usr/local/bin/gls"))
-      (if (file-exists-p gls)
-          (setq insert-directory-program gls)))
+    (if (eq system-type 'darwin)
+        (let ((gls "/usr/local/bin/gls"))
+          (if (file-exists-p gls)
+              (setq insert-directory-program gls))))
     (setq dired-listing-switches "-lXGh --group-directories-first")))
 
 ;; For Dired+, the detailed listing is set as the default, and reuse of a single
@@ -253,7 +256,7 @@
 
 ;; -----------------------------------------------------------------------------
 
-;; Packages/Exec Path From Shell
+;; Packages/Exec-Path-From-Shell
 
 ;; Ensure that the path is initialized from environment settings defined and
 ;; configured by the appropriate shell.
@@ -269,10 +272,38 @@
 ;; Packages/Flycheck
 
 ;; Integrates external checking processes with buffer editing, providing
-;; in-place warning, error, etc. notification via highlighting and tooltips.
+;; in-place warning, error, etc. notification via highlighting and tool tips.
 
 (use-package flycheck
   :config (global-flycheck-mode)
+  :ensure t
+  :pin melpa-stable)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Flyspell
+
+;; Use Flyspell automatically for appropriate modes, and use likeness-based
+;; correction matching in the case of multiple potential corrections.
+
+(use-package flyspell
+  :config
+  (progn
+    (setq flyspell-sort-corrections nil
+          ispell-dictionary "british-ise-w_accents"
+          ispell-program-name "aspell")
+    ;; Uncomment following for flyspell of prog-mode comments and strings.
+    ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+    (add-hook 'text-mode-hook 'flyspell-mode))
+  :diminish flyspell-mode
+  :ensure t
+  :pin melpa-stable)
+
+;; Use Ivy integration for correction.
+
+(use-package flyspell-correct-ivy
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
+  :demand t
   :ensure t
   :pin melpa-stable)
 

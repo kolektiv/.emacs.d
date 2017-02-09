@@ -175,13 +175,18 @@
    `(flycheck-info                           ((,class (:underline ,info-1))))
    `(flycheck-warning                        ((,class (:underline ,warning-1))))
 
+   ;; Flyspell
+
+   `(flyspell-duplicate                      ((,class (:underline ,error-1))))
+   `(flyspell-incorrect                      ((,class (:underline ,warning-1))))
+   
    ;; Git
 
    `(git-commit-summary                      ((,class (:foreground ,fg-a+3 :weight light))))
 
    ;; Ivy
 
-   `(ivy-action                              ((,class (:inherit default :foreground "#ffff00"))))
+   `(ivy-action                              ((,class (:inherit default :foreground ,fg-a+3 :weight normal))))
    `(ivy-confirm-face                        ((,class (:inherit default :foreground "#ff00ff"))))
    `(ivy-current-match                       ((,class (:inherit default :foreground ,fg-b+0 :background ,bg-b+3 :weight normal))))
    `(ivy-match-required-face                 ((,class (:inherit default :foreground ,warning-1))))
