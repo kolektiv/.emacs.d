@@ -73,13 +73,13 @@
 
 (setq-default indent-tabs-mode nil
               line-spacing 0.2
+              mode-require-final-newline nil
               tab-width 4
               truncate-lines t
               show-paren-delay 0)
 
 (setq column-number-mode t
       line-number-mode t
-      require-final-newline t
       next-line-add-newlines nil
       indent-tabs-mode nil)
 
@@ -256,6 +256,15 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Ethan-WSpace
+
+(use-package ethan-wspace
+  :config (global-ethan-wspace-mode 1)
+  :ensure t
+  :pin melpa-stable)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Exec-Path-From-Shell
 
 ;; Ensure that the path is initialized from environment settings defined and
@@ -387,7 +396,7 @@
    ("\\.md\\'"       . markdown-mode)
    ("\\.markdown\\'" . markdown-mode))
   :pin melpa-stable)
-  
+
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Org

@@ -132,7 +132,7 @@
    `(diredp-file-name                        ((,class (:inherit default :foreground ,fg-a+3))))
    `(diredp-file-suffix                      ((,class (:inherit default :foreground ,fg-a-4))))
    `(diredp-number                           ((,class (:inherit default :foreground ,fg-a-1))))
-   
+
    ;; ERC
 
    `(erc-action-face                         ((,class (:weight normal))))
@@ -153,6 +153,10 @@
    `(erc-notice-face                         ((,class (:inherit font-lock-comment-face))))
    `(erc-prompt-face                         ((,class (:inherit font-lock-type-face :weight light))))
    `(erc-timestamp-face                      ((,class (:inherit font-lock-comment-delimiter-face))))
+
+   ;; Ethan-WSpace
+
+   `(ethan-wspace-face                       ((,class (:background ,warning-1))))
 
    ;; Font Lock
 
@@ -179,7 +183,7 @@
 
    `(flyspell-duplicate                      ((,class (:underline ,error-1))))
    `(flyspell-incorrect                      ((,class (:underline ,warning-1))))
-   
+
    ;; Git
 
    `(git-commit-summary                      ((,class (:foreground ,fg-a+3 :weight light))))
@@ -225,7 +229,7 @@
    `(outline-5                               ((,class (:foreground ,fg-a+1 :weight light))))
    `(outline-6                               ((,class (:foreground ,fg-a+0 :weight light))))
    `(outline-7                               ((,class (:foreground ,fg-a-1 :weight light))))
-   
+
    ;; Paren Showing
 
    `(show-paren-match                        ((,class (:background ,bg-b-2))))
