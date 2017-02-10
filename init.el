@@ -188,6 +188,19 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Company
+
+;; Company mode enabled globally, for use with modes which integrate in
+;; particular.
+
+(use-package company
+  :bind (("C-SPC" . company-complete))
+  :config (global-company-mode)
+  :diminish (company-mode)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Counsel
 
 ;; Better M-x and related functions, using the underlying Ivy support for better
@@ -202,12 +215,13 @@
    ("C-c j"   . counsel-git-grep)
    ("C-c k"   . counsel-ag)
    ("C-c l"   . counsel-locate))
-  :config (counsel-mode)
+  :config
+  (progn
+    (counsel-mode)
+    (use-package counsel-projectile
+      :config (counsel-projectile-on)
+      :ensure t))
   :diminish counsel-mode
-  :ensure t)
-
-(use-package counsel-projectile
-  :config (counsel-projectile-on)
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -219,6 +233,10 @@
 ;; as part of coreutils. Listing switches are also set to sort directories
 ;; first.
 
+;; For Dired+, the detailed listing is set as the default, and reuse of a single
+;; Dired buffer is enabled to avoid cluttering Emacs with hundreds of Dired
+;; buffers.
+
 (use-package dired
   :config
   (progn
@@ -226,18 +244,13 @@
         (let ((gls "/usr/local/bin/gls"))
           (if (file-exists-p gls)
               (setq insert-directory-program gls))))
-    (setq dired-listing-switches "-lXGh --group-directories-first")))
-
-;; For Dired+, the detailed listing is set as the default, and reuse of a single
-;; Dired buffer is enabled to avoid cluttering Emacs with hundreds of Dired
-;; buffers.
-
-(use-package dired+
-  :ensure t
-  :init
-  (progn
-    (setq-default diredp-hide-details-initially-flag nil)
-    (diredp-toggle-find-file-reuse-dir 1)))
+    (setq dired-listing-switches "-lXGh --group-directories-first")
+    (use-package dired+
+      :ensure t
+      :init
+      (progn
+        (setq-default diredp-hide-details-initially-flag nil)
+        (diredp-toggle-find-file-reuse-dir 1)))))
 
 ;; -----------------------------------------------------------------------------
 
@@ -289,6 +302,9 @@
 ;; Use Flyspell automatically for appropriate modes, and use likeness-based
 ;; correction matching in the case of multiple potential corrections.
 
+;; Ivy integration is included for Flyspell correction functionality, bound to
+;; C-; - note that save functionality is then available using Ivy actions.
+
 (use-package flyspell
   :config
   (progn
@@ -297,15 +313,12 @@
           ispell-program-name "aspell")
     ;; Uncomment following for flyspell of prog-mode comments and strings.
     ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-    (add-hook 'text-mode-hook 'flyspell-mode))
+    (add-hook 'text-mode-hook 'flyspell-mode)
+    (use-package flyspell-correct-ivy
+      :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
+      :demand t
+      :ensure t))
   :diminish flyspell-mode
-  :ensure t)
-
-;; Use Ivy integration for correction.
-
-(use-package flyspell-correct-ivy
-  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
-  :demand t
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -381,6 +394,9 @@
 ;; Emacs for version control management. Integrated with Ivy and enabled
 ;; globally.
 
+;; Magithub is included to provide additional integration with Github through
+;; the Magit porcelain.
+
 (use-package magit
   :bind
   (("C-x g"   . magit-status)
@@ -388,15 +404,11 @@
   :config
   (progn
     (setq magit-completing-read-function 'ivy-completing-read)
-    (global-magit-file-mode))
+    (global-magit-file-mode)
+    (use-package magithub
+      :ensure t))
   :demand t
   :diminish (auto-revert-mode)
-  :ensure t)
-
-;; Use magithub to provide additional integration with Github through the Magit
-;; porcelain.
-
-(use-package magithub
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -439,7 +451,7 @@
 
 ;; -----------------------------------------------------------------------------
 
-;; Packages/Rainbow Delimiters
+;; Packages/Rainbow-Delimiters
 
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
@@ -475,13 +487,6 @@
 
 (use-package terraform-mode
   :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Text
-
-;; Configuration of the base text-mode. Usage of other specific packages such
-;; as Flyspell are configured within the configuration of those packages.
 
 ;; -----------------------------------------------------------------------------
 
