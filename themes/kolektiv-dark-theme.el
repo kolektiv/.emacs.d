@@ -188,6 +188,10 @@
 
    `(git-commit-summary                      ((,class (:foreground ,fg-a+3 :weight light))))
 
+   ;; Indent Guide
+
+   `(indent-guide-face                       ((,class (:foreground ,fg-a-5))))
+
    ;; Ivy
 
    `(ivy-action                              ((,class (:inherit default :foreground ,fg-a+3 :weight normal))))

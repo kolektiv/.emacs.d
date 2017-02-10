@@ -13,6 +13,7 @@
 ;;; History:
 
 ;; 2016-11-30: Changing to use use-package, and simplifying to single file.
+;; 2017-02-10: Noting that this section will not be maintained - see Git.
 
 ;;; Code:
 
@@ -142,10 +143,11 @@
 (eval-when-compile
   (setq package-archives
         '(("gnu"          . "http://elpa.gnu.org/packages/")
-          ("org"          . "http://orgmode.org/elpa/")
           ("melpa"        . "http://melpa.org/packages/")
-          ("melpa-stable" . "http://stable.melpa.org/packages/"))
-        package-archive-priorities '(("melpa-stable" . 1))))
+          ("melpa-stable" . "http://stable.melpa.org/packages/")
+          ("org"          . "http://orgmode.org/elpa/"))
+        package-archive-priorities
+        '(("melpa"        . 1))))
 
 (package-initialize)
 
@@ -202,13 +204,11 @@
    ("C-c l"   . counsel-locate))
   :config (counsel-mode)
   :diminish counsel-mode
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 (use-package counsel-projectile
   :config (counsel-projectile-on)
-  :ensure t
-  :pin melpa)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -237,8 +237,7 @@
   :init
   (progn
     (setq-default diredp-hide-details-initially-flag nil)
-    (diredp-toggle-find-file-reuse-dir 1))
-  :pin melpa)
+    (diredp-toggle-find-file-reuse-dir 1)))
 
 ;; -----------------------------------------------------------------------------
 
@@ -251,8 +250,7 @@
 
 (use-package ensime
   :disabled t
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -260,8 +258,7 @@
 
 (use-package ethan-wspace
   :config (global-ethan-wspace-mode 1)
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -272,9 +269,7 @@
 
 (use-package exec-path-from-shell
   :config (exec-path-from-shell-initialize)
-  :demand t
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -285,8 +280,7 @@
 
 (use-package flycheck
   :config (global-flycheck-mode)
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -305,16 +299,27 @@
     ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
     (add-hook 'text-mode-hook 'flyspell-mode))
   :diminish flyspell-mode
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; Use Ivy integration for correction.
 
 (use-package flyspell-correct-ivy
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
   :demand t
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Fill-Column-Indicator
+
+(use-package fill-column-indicator
+  :config
+  (progn
+    (setq fci-rule-color "#444444"
+          fci-rule-column 80
+          fci-rule-use-dashes nil)
+    (add-hook 'prog-mode-hook 'turn-on-fci-mode))
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -324,8 +329,7 @@
 ;; general usage.
 
 (use-package flx
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -334,8 +338,16 @@
 ;; Hashicorp Configuration Language mode, highlighting basic HCL.
 
 (use-package hcl-mode
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Indent-Guide
+
+(use-package indent-guide
+  :config (indent-guide-global-mode)
+  :diminish (indent-guide-mode)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -358,9 +370,8 @@
     (add-to-list 'ivy-ignore-buffers "\\*magit")
     (add-to-list 'ivy-ignore-buffers "\\*Flycheck")
     (ivy-mode 1))
-  :diminish ivy-mode
-  :ensure t
-  :pin melpa-stable)
+  :diminish (ivy-mode)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -379,9 +390,14 @@
     (setq magit-completing-read-function 'ivy-completing-read)
     (global-magit-file-mode))
   :demand t
-  :diminish auto-revert-mode
-  :ensure t
-  :pin melpa-stable)
+  :diminish (auto-revert-mode)
+  :ensure t)
+
+;; Use magithub to provide additional integration with Github through the Magit
+;; porcelain.
+
+(use-package magithub
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -394,8 +410,7 @@
   :mode
   (("README\\.md\\'" . gfm-mode)
    ("\\.md\\'"       . markdown-mode)
-   ("\\.markdown\\'" . markdown-mode))
-  :pin melpa-stable)
+   ("\\.markdown\\'" . markdown-mode)))
 
 ;; -----------------------------------------------------------------------------
 
@@ -419,9 +434,8 @@
               (propertize
                (format " Project[%s]" (projectile-project-name))
                'face 'projectile-mode-line))))
-    (projectile-global-mode))
-  :ensure t
-  :pin melpa-stable)
+    (projectile-mode))
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -429,8 +443,7 @@
 
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -438,8 +451,7 @@
 
 (use-package sbt-mode
   :commands (sbt-command sbt-start)
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -447,8 +459,7 @@
 
 (use-package scala-mode
   :ensure t
-  :interpreter ("scala" . scala-mode)
-  :pin melpa-stable)
+  :interpreter ("scala" . scala-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -456,24 +467,28 @@
 
 (use-package swiper
   :bind ("C-s" . swiper)
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Terraform
 
 (use-package terraform-mode
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Text
+
+;; Configuration of the base text-mode. Usage of other specific packages such
+;; as Flyspell are configured within the configuration of those packages.
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/YAML
 
 (use-package yaml-mode
-  :ensure t
-  :pin melpa-stable)
+  :ensure t)
 
 ;; =============================================================================
 
