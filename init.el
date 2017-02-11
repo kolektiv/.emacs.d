@@ -202,6 +202,8 @@
     (use-package company-flx
       :config (company-flx-mode +1)
       :ensure t)
+    (setq company-auto-complete t
+          company-idle-delay 1)
     (global-company-mode))
   :diminish (company-mode)
   :ensure t)
@@ -474,7 +476,6 @@
 
 (use-package purescript-mode
   :config (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
-  :diminish 'purescript-indentation-mode
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -486,7 +487,6 @@
   (progn
     (setq psc-ide-use-npm-bin t)
     (add-hook 'purescript-mode-hook 'psc-ide-mode))
-  :diminish purescript-indentation-mode
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
