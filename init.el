@@ -191,11 +191,18 @@
 ;; Packages/Company
 
 ;; Company mode enabled globally, for use with modes which integrate in
-;; particular.
+;; particular. Also added is company-flx, which enables fuzzy matching for
+;; company-mode completions (if using a CAPF backend). This seems to work quite
+;; well, but may be re-evaluated if it becomes to slow/unstable.
 
 (use-package company
   :bind (("C-SPC" . company-complete))
-  :config (global-company-mode)
+  :config
+  (progn
+    (use-package company-flx
+      :config (company-flx-mode +1)
+      :ensure t)
+    (global-company-mode))
   :diminish (company-mode)
   :ensure t)
 
@@ -325,9 +332,21 @@
 
 ;; Packages/Fill-Column-Indicator
 
+;; Fill column indicator (configured for a classic 80 column width). A function
+;; to temporarily suspend fci-mode is configured, and run when company-mode is
+;; actively displaying a frontend. This prevents a positioning bug where the
+;; frontend popup will be displayed after the fill column indicator character.
+
 (use-package fill-column-indicator
   :config
   (progn
+    (eval-when-compile
+      (defun suspend-fci-mode (command)
+        (when (string= "show" command)
+          (turn-off-fci-mode))
+        (when (string= "hide" command)
+          (turn-on-fci-mode))))
+    (advice-add 'company-call-frontends :before #'suspend-fci-mode)
     (setq fci-rule-color "#444444"
           fci-rule-column 80
           fci-rule-use-dashes nil)
@@ -447,6 +466,27 @@
                (format " Project[%s]" (projectile-project-name))
                'face 'projectile-mode-line))))
     (projectile-mode))
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Purescript
+
+(use-package purescript-mode
+  :config (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
+  :diminish 'purescript-indentation-mode
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/PSC-IDE
+
+(use-package psc-ide
+  :config
+  (progn
+    (setq psc-ide-use-npm-bin t)
+    (add-hook 'purescript-mode-hook 'psc-ide-mode))
+  :diminish purescript-indentation-mode
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
