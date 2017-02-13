@@ -235,11 +235,12 @@
     (setq company-auto-complete t
           company-idle-delay 1
           company-tooltip-minimum-width 30)
-    (global-company-mode)
-    (use-package company-flx
-      :config (company-flx-mode 1)
-      :ensure t))
+    (global-company-mode))
   :diminish (company-mode)
+  :ensure t)
+
+(use-package company-flx
+  :config (company-flx-mode 1)
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -258,13 +259,12 @@
    ("C-c j"   . counsel-git-grep)
    ("C-c k"   . counsel-ag)
    ("C-c l"   . counsel-locate))
-  :config
-  (progn
-    (counsel-mode)
-    (use-package counsel-projectile
-      :config (counsel-projectile-on)
-      :ensure t))
-  :diminish counsel-mode
+  :config (counsel-mode)
+  :diminish (counsel-mode)
+  :ensure t)
+
+(use-package counsel-projectile
+  :config (counsel-projectile-on)
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -287,13 +287,14 @@
         (let ((gls "/usr/local/bin/gls"))
           (if (file-exists-p gls)
               (setq insert-directory-program gls))))
-    (setq dired-listing-switches "-lXGh --group-directories-first")
-    (use-package dired+
-      :ensure t
-      :init
-      (progn
-        (setq-default diredp-hide-details-initially-flag nil)
-        (diredp-toggle-find-file-reuse-dir 1)))))
+    (setq dired-listing-switches "-lXGh --group-directories-first")))
+
+(use-package dired+
+  :ensure t
+  :init
+  (progn
+    (setq-default diredp-hide-details-initially-flag nil)
+    (diredp-toggle-find-file-reuse-dir 1)))
 
 ;; -----------------------------------------------------------------------------
 
@@ -356,12 +357,13 @@
           ispell-program-name "aspell")
     ;; Uncomment following for flyspell of prog-mode comments and strings.
     ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-    (add-hook 'text-mode-hook 'flyspell-mode)
-    (use-package flyspell-correct-ivy
-      :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
-      :demand t
-      :ensure t))
+    (add-hook 'text-mode-hook 'flyspell-mode))
   :diminish flyspell-mode
+  :ensure t)
+
+(use-package flyspell-correct-ivy
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
+  :demand t
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -479,11 +481,13 @@
   :config
   (progn
     (setq magit-completing-read-function 'ivy-completing-read)
-    (global-magit-file-mode)
-    (use-package magithub
-      :ensure t))
-  :demand t
+    (global-magit-file-mode))
   :diminish (auto-revert-mode)
+  :ensure t)
+
+(use-package magithub
+  :after magit
+  :config (magithub-feature-autoinject t)
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
