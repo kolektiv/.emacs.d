@@ -87,6 +87,7 @@
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 (delete-selection-mode 1)
 (global-font-lock-mode 1)
+(global-prettify-symbols-mode 1)
 (show-paren-mode 1)
 (transient-mark-mode 1)
 
@@ -188,6 +189,38 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Aggressive-Indent
+
+;; Make re-indentation of code more aggressive, continually re-aligning things
+;; as appropriate while editing.
+
+(use-package aggressive-indent
+  :config
+  (progn
+    (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
+    (add-to-list 'aggressive-indent-excluded-modes 'purescript-mode)
+    (global-aggressive-indent-mode 1))
+  :diminish (aggressive-indent-mode)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Auto-Package-Update
+
+;; Keep packages up to date, removing old packages. Override the periodicity to
+;; check regularly, in this case once a day.
+
+(use-package auto-package-update
+  :config
+  (progn
+    (setq auto-package-update-delete-old-versions t
+          auto-package-update-interval 1)
+    (auto-package-update-maybe))
+  :demand t
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Company
 
 ;; Company mode enabled globally, for use with modes which integrate in
@@ -199,12 +232,13 @@
   :bind (("C-SPC" . company-complete))
   :config
   (progn
-    (use-package company-flx
-      :config (company-flx-mode +1)
-      :ensure t)
     (setq company-auto-complete t
-          company-idle-delay 1)
-    (global-company-mode))
+          company-idle-delay 1
+          company-tooltip-minimum-width 30)
+    (global-company-mode)
+    (use-package company-flx
+      :config (company-flx-mode 1)
+      :ensure t))
   :diminish (company-mode)
   :ensure t)
 
@@ -349,7 +383,7 @@
         (when (string= "hide" command)
           (turn-on-fci-mode))))
     (advice-add 'company-call-frontends :before #'suspend-fci-mode)
-    (setq fci-rule-color "#444444"
+    (setq fci-rule-color "#3a3a3a"
           fci-rule-column 80
           fci-rule-use-dashes nil)
     (add-hook 'prog-mode-hook 'turn-on-fci-mode))
@@ -363,6 +397,26 @@
 ;; general usage.
 
 (use-package flx
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Git-Gutter
+
+;; Show changes from the current Git version of a file in the left hand gutter,
+;; indicating changes through slightly customised symbols. Automatically update
+;; after 2 seconds, without waiting for save (the default).
+
+(use-package git-gutter
+  :config
+  (progn
+    (setq git-gutter:added-sign "++"
+          git-gutter:always-show-separator t
+          git-gutter:deleted-sign "--"
+          git-gutter:modified-sign "=="
+          git-gutter:update-interval 2)
+    (global-git-gutter-mode 1))
+  :diminish (git-gutter-mode)
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -495,6 +549,17 @@
 
 (use-package rainbow-delimiters
   :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Rainbow
+
+;; Display colour codes visually within buffers (hex, X, etc.)
+
+(use-package rainbow-mode
+  :config (add-hook 'prog-mode-hook 'rainbow-mode)
+  :diminish (rainbow-mode)
   :ensure t)
 
 ;; -----------------------------------------------------------------------------

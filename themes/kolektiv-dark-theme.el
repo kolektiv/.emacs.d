@@ -69,6 +69,8 @@
 
       ;; Foreground/Base
 
+      (fg-a-7 "#222222")
+      (fg-a-6 "#333333")
       (fg-a-5 "#444444")
       (fg-a-4 "#555555")
       (fg-a-3 "#666666")
@@ -92,7 +94,9 @@
       (success-1 "#1dd13b")
       (warning-1 "#ed6f1c"))
 
-  (custom-theme-set-faces 'kolektiv-dark
+  (custom-theme-set-faces
+
+   'kolektiv-dark
 
    ;; Basic
 
@@ -102,6 +106,7 @@
    `(error                                   ((,class (:background ,bg-a-1 :foreground ,error-1 :weight normal))))
    `(fixed-pitch                             ((,class (:inherit default))))
    `(fringe                                  ((,class (:background ,bg-a-1 :foreground ,fg-a-4))))
+   `(header-line                             ((,class (:inherit mode-line))))
    `(highlight                               ((,class (:background ,bg-b-4))))
    `(isearch                                 ((,class (:background ,bg-b-2))))
    `(lazy-highlight                          ((,class (:background ,bg-b-3))))
@@ -117,6 +122,13 @@
    `(secondary-selection                     ((,class (:background ,bg-a-3))))
    `(success                                 ((,class (:foreground ,success-1))))
    `(warning                                 ((,class (:foreground ,warning-1))))
+
+   ;; Company
+
+   `(company-scrollbar-bg                    ((,class (:background ,bg-b-1))))
+   `(company-scrollbar-fg                    ((,class (:background ,bg-b-4))))
+   `(company-tooltip                         ((,class (:background ,bg-b+0 :foreground ,fg-a-6))))
+   `(company-tooltip-selection               ((,class (:background ,bg-b+3 :foreground ,fg-a-7))))
 
    ;; Dired
 
@@ -187,6 +199,13 @@
    ;; Git
 
    `(git-commit-summary                      ((,class (:foreground ,fg-a+3 :weight light))))
+
+   ;; Git Gutter
+
+   `(git-gutter:added                        ((,class (:inherit default :foreground ,fg-a-3))))
+   `(git-gutter:deleted                      ((,class (:inherit default :foreground ,fg-a-3))))
+   `(git-gutter:modified                     ((,class (:inherit default :foreground ,fg-a-3))))
+   `(git-gutter:separator                    ((,class (:inherit default :foreground ,fg-a-4))))
 
    ;; Indent Guide
 
