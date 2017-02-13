@@ -472,7 +472,8 @@
 ;; globally.
 
 ;; Magithub is included to provide additional integration with Github through
-;; the Magit porcelain.
+;; the Magit porcelain. This is currently disabled given slightly odd process
+;; behaviour.
 
 (use-package magit
   :bind
@@ -488,6 +489,7 @@
 (use-package magithub
   :after magit
   :config (magithub-feature-autoinject t)
+  :disabled t
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
