@@ -87,7 +87,7 @@
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 (delete-selection-mode 1)
 (global-font-lock-mode 1)
-(global-prettify-symbols-mode 1)
+(global-prettify-symbols-mode 0)
 (show-paren-mode 1)
 (transient-mark-mode 1)
 
@@ -465,6 +465,28 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/JS2
+
+;; A "modern" JavaScript mode, set for all .js files.
+
+(use-package js2-mode
+  :config (setq js2-basic-offset 4)
+  :ensure t
+  :mode (("\\.js\\'" . js2-mode)))
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/JSON
+
+;; JSON support.
+
+(use-package json-mode
+  :config (setq js-indent-level 2)
+  :ensure t
+  :mode (("\\.json\\'" . json-mode)))
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Magit
 
 ;; Powerful and comprehensive Git porcelain avoiding the need to move outside of
@@ -510,6 +532,7 @@
 ;; Packages/Org
 
 (use-package org
+  :config (setq org-startup-indented t)
   :ensure org-plus-contrib
   :pin org)
 

@@ -214,7 +214,7 @@
    ;; Ivy
 
    `(ivy-action                              ((,class (:inherit default :foreground ,fg-a+3 :weight normal))))
-   `(ivy-confirm-face                        ((,class (:inherit default :foreground "#ff00ff"))))
+   `(ivy-confirm-face                        ((,class (:inherit default :foreground ,error-1))))
    `(ivy-current-match                       ((,class (:inherit default :foreground ,fg-b+0 :background ,bg-b+3 :weight normal))))
    `(ivy-match-required-face                 ((,class (:inherit default :foreground ,warning-1))))
    `(ivy-minibuffer-match-face-1             ((,class (:inherit default :foreground ,fg-b+0 :background ,bg-b-1))))
@@ -225,6 +225,12 @@
    `(ivy-remote                              ((,class (:inherit default :foreground ,fg-a+1 :underline ,fg-a-3))))
    `(ivy-subdir                              ((,class (:inherit default :foreground ,fg-a-3 :underline t))))
    `(ivy-virtual                             ((,class (:inherit default :foreground ,fg-a-3))))
+
+   ;; JS2
+
+   `(js2-error                               ((,class (:foreground ,error-1 :underline t))))
+   `(js2-external-variable                   ((,class (:foreground ,warning-1))))
+   `(js2-function-param                      ((,class (:foreground ,fg-a-2 :underline ,fg-a-5))))
 
    ;; Magit
 
