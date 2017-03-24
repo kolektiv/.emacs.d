@@ -290,6 +290,7 @@
     (setq dired-listing-switches "-lXGh --group-directories-first")))
 
 (use-package dired+
+  :demand t
   :ensure t
   :init
   (progn
@@ -362,7 +363,7 @@
   :ensure t)
 
 (use-package flyspell-correct-ivy
-  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-word-generic))
+  :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-previous-word-generic))
   :demand t
   :ensure t)
 
@@ -389,6 +390,7 @@
           fci-rule-column 80
           fci-rule-use-dashes nil)
     (add-hook 'prog-mode-hook 'turn-on-fci-mode))
+  :disabled t
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -399,6 +401,15 @@
 ;; general usage.
 
 (use-package flx
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Focus
+
+;; Focus mode, diminishing unfocused text while reading/editing.
+
+(use-package focus
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -470,7 +481,8 @@
 ;; A "modern" JavaScript mode, set for all .js files.
 
 (use-package js2-mode
-  :config (setq js2-basic-offset 4)
+  :config (setq js2-basic-offset 4
+                js2-include-node-externs t)
   :ensure t
   :mode (("\\.js\\'" . js2-mode)))
 
@@ -481,7 +493,11 @@
 ;; JSON support.
 
 (use-package json-mode
-  :config (setq js-indent-level 2)
+  :config
+  (add-hook 'json-mode-hook
+            (lambda ()
+              (make-local-variable 'js-indent-level)
+              (setq js-indent-level 2)))
   :ensure t
   :mode (("\\.json\\'" . json-mode)))
 
@@ -535,6 +551,20 @@
   :config (setq org-startup-indented t)
   :ensure org-plus-contrib
   :pin org)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/PlantUML
+
+(use-package plantuml-mode
+  ;; :config (setq plantuml-jar-path "")
+  :ensure t
+  :mode
+  (("\\.plantuml\\'" . plantuml-mode)))
+
+(use-package flycheck-plantuml
+  :config (flycheck-plantuml-setup)
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -624,9 +654,42 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/TIDE
+
+(use-package tide
+  :config
+  (progn
+    (add-hook 'before-save-hook 'tide-format-before-save)
+    (add-hook 'typescript-mode-hook 'tide-setup))
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/TypeScript
+
+(use-package typescript-mode
+  :ensure t
+  :mode (("\\.ts\\'" . typescript-mode)))
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Uniquify
+
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'forward
+        uniquify-separator "/")
+  :demand t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/YAML
 
 (use-package yaml-mode
+  :config
+  (progn
+    (add-hook 'yaml-mode-hook 'turn-off-flyspell)
+    (add-hook 'yaml-mode-hook 'turn-on-fci-mode))
   :ensure t)
 
 ;; =============================================================================
