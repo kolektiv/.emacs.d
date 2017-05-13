@@ -205,6 +205,15 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Alchemist (Elixir)
+
+;; Elixir/Mix integration/IDE.
+
+(use-package alchemist
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Auto-Package-Update
 
 ;; Keep packages up to date, removing old packages. Override the periodicity to
@@ -430,6 +439,15 @@
           git-gutter:update-interval 2)
     (global-git-gutter-mode 1))
   :diminish (git-gutter-mode)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Haskell
+
+;; Haskell mode
+
+(use-package haskell-mode
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
