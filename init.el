@@ -461,6 +461,16 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/HIndent
+
+;; Haskell indentation integration with haskell-mode.
+
+(use-package hindent
+  :config (add-hook 'haskell-mode-hook #'hindent-mode)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Indent-Guide
 
 (use-package indent-guide

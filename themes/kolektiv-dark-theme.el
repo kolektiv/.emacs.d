@@ -46,53 +46,53 @@
 
       ;; Background/Base
 
-      (bg-a-3 "#111111")
-      (bg-a-2 "#222222")
-      (bg-a-1 "#303030")
-      (bg-a+0 "#333333") ;; Baseline
-      (bg-a+1 "#3a3a3a")
-      (bg-a+2 "#3f3f3f")
-      (bg-a+3 "#444444")
-      (bg-a+4 "#555555")
+      (bg-a-3 "#121212") ;; 233
+      (bg-a-2 "#1c1c1c") ;; 234
+      (bg-a-1 "#262626") ;; 235
+      (bg-a+0 "#303030") ;; Baseline
+      (bg-a+1 "#3a3a3a") ;; 237
+      (bg-a+2 "#444444") ;; 238
+      (bg-a+3 "#4e4e4e") ;; 239
+      (bg-a+4 "#585858") ;; 240
 
       ;; Background/Contrast
 
-      (bg-b-4 "#666666")
-      (bg-b-3 "#777777")
-      (bg-b-2 "#888888")
-      (bg-b-1 "#999999")
-      (bg-b+0 "#aaaaaa") ;; Baseline
-      (bg-b+1 "#cccccc")
-      (bg-b+2 "#dddddd")
-      (bg-b+3 "#eeeeee")
-      (bg-b+4 "#ffffff")
+      (bg-b-4 "#6c6c6c") ;; 242
+      (bg-b-3 "#767676") ;; 243
+      (bg-b-2 "#8a8a8a") ;; 245
+      (bg-b-1 "#9e9e9e") ;; 247
+      (bg-b+0 "#a8a8a8") ;; Baseline
+      (bg-b+1 "#c6c6c6") ;; 251
+      (bg-b+2 "#dadada") ;; 253
+      (bg-b+3 "#eeeeee") ;; 255
+      (bg-b+4 "#ffffff") ;; 231 *
 
       ;; Foreground/Base
 
-      (fg-a-7 "#222222")
-      (fg-a-6 "#333333")
-      (fg-a-5 "#444444")
-      (fg-a-4 "#555555")
-      (fg-a-3 "#666666")
-      (fg-a-2 "#777777")
-      (fg-a-1 "#888888")
-      (fg-a+0 "#999999") ;; Baseline
-      (fg-a+1 "#aaaaaa")
-      (fg-a+2 "#bbbbbb")
-      (fg-a+3 "#cccccc")
-      (fg-a+4 "#dddddd")
-      (fg-a+5 "#eeeeee")
+      (fg-a-7 "#222222") ;; 235
+      (fg-a-6 "#303030") ;; 236
+      (fg-a-5 "#444444") ;; 238
+      (fg-a-4 "#585858") ;; 240
+      (fg-a-3 "#626262") ;; 242
+      (fg-a-2 "#767676") ;; 243
+      (fg-a-1 "#8a8a8a") ;; 245
+      (fg-a+0 "#949494") ;; Baseline
+      (fg-a+1 "#a8a8a8") ;; 248
+      (fg-a+2 "#bcbcbc") ;; 250
+      (fg-a+3 "#c6c6c6") ;; 251
+      (fg-a+4 "#dadada") ;; 253
+      (fg-a+5 "#eeeeee") ;; 255
 
       ;; Foreground/Contrast
 
-      (fg-b+0 "#333333") ;; Baseline
+      (fg-b+0 "#3a3a3a") ;; Baseline
 
       ;; Semantic
 
-      (error-1   "#ed381c")
-      (info-1    "#1dd13b")
-      (success-1 "#1dd13b")
-      (warning-1 "#ed6f1c"))
+      (error-1   "#d70000")  ;; 160
+      (info-1    "#afff00")  ;; 154
+      (success-1 "#afff00")  ;; 154
+      (warning-1 "#ff5f00")) ;; 202
 
   (custom-theme-set-faces
 
