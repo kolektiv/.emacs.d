@@ -509,7 +509,9 @@
 ;; A "modern" JavaScript mode, set for all .js files.
 
 (use-package js2-mode
-  :config (setq js2-basic-offset 4
+  :config (setq js-switch-indent-offset 2
+                js-indent-level 2
+                js2-basic-offset 2
                 js2-include-node-externs t)
   :ensure t
   :mode (("\\.js\\'" . js2-mode)))
@@ -528,6 +530,16 @@
               (setq js-indent-level 2)))
   :ensure t
   :mode (("\\.json\\'" . json-mode)))
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/JSX
+
+;; JSX support (using rjsx-mode) for React JS, including support for embedded
+;; markup, etc.
+
+(use-package rjsx-mode
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
