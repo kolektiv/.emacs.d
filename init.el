@@ -189,6 +189,21 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Add-Node-Modules-Path
+
+;; Add the node_modules/.bin/ directory to the local exec-path when it is found
+;; in a parent directory, allowing tools to use local node installs of tools
+;; such as eslint, etc.
+
+(use-package add-node-modules-path
+  :config
+  (progn
+    (add-hook 'js-mode 'add-node-modules-path)
+    (add-hook 'js2-mode-hook 'add-node-modules-path))
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Aggressive-Indent
 
 ;; Make re-indentation of code more aggressive, continually re-aligning things
