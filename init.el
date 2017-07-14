@@ -458,6 +458,15 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/GraphQL
+
+;; A graphql major mode for editing graphql schema.
+
+(use-package graphql-mode
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Haskell
 
 ;; Haskell mode
