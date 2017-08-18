@@ -1,4 +1,4 @@
-;;; init.el --- Personal Emacs Configuration
+;; init.el --- Personal Emacs Configuration
 
 ;; Author: Andrew Cherry <andrew@xyncro.com>
 ;; Keywords: emacs, init
@@ -618,20 +618,6 @@
 
 ;; -----------------------------------------------------------------------------
 
-;; Packages/PlantUML
-
-(use-package plantuml-mode
-  ;; :config (setq plantuml-jar-path "")
-  :ensure t
-  :mode
-  (("\\.plantuml\\'" . plantuml-mode)))
-
-(use-package flycheck-plantuml
-  :config (flycheck-plantuml-setup)
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
 ;; Packages/Projectile
 
 (use-package projectile
@@ -653,17 +639,6 @@
 
 (use-package purescript-mode
   :config (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/PSC-IDE
-
-(use-package psc-ide
-  :config
-  (progn
-    (setq psc-ide-use-npm-bin t)
-    (add-hook 'purescript-mode-hook 'psc-ide-mode))
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
