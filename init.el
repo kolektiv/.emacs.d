@@ -87,7 +87,7 @@
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 (delete-selection-mode 1)
 (global-font-lock-mode 1)
-(global-prettify-symbols-mode 0)
+(global-prettify-symbols-mode 1)
 (show-paren-mode 1)
 (transient-mark-mode 1)
 
@@ -148,7 +148,7 @@
           ("melpa-stable" . "http://stable.melpa.org/packages/")
           ("org"          . "http://orgmode.org/elpa/"))
         package-archive-priorities
-        '(("melpa"        . 1))))
+        '(("melpa-stable" . 1))))
 
 (package-initialize)
 
