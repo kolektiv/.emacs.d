@@ -87,7 +87,7 @@
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 (delete-selection-mode 1)
 (global-font-lock-mode 1)
-(global-prettify-symbols-mode 1)
+;; (global-prettify-symbols-mode 1)
 (show-paren-mode 1)
 (transient-mark-mode 1)
 
@@ -288,7 +288,7 @@
   :ensure t)
 
 (use-package counsel-projectile
-  :config (counsel-projectile-on)
+  :config (counsel-projectile-mode)
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -618,6 +618,18 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/PlantUML
+
+(use-package plantuml-mode
+  :mode (("\\.plantuml\\'" . plantuml-mode-map))
+  :ensure t)
+
+(use-package flycheck-plantuml
+  :config (flycheck-plantuml-setup)
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Projectile
 
 (use-package projectile
@@ -630,7 +642,7 @@
               (propertize
                (format " Project[%s]" (projectile-project-name))
                'face 'projectile-mode-line))))
-    (projectile-mode))
+    (projectile-global-mode))
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
