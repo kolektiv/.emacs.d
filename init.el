@@ -313,13 +313,13 @@
               (setq insert-directory-program gls))))
     (setq dired-listing-switches "-lXGh --group-directories-first")))
 
-(use-package dired+
-  :demand t
-  :ensure t
-  :init
-  (progn
-    (setq-default diredp-hide-details-initially-flag nil)
-    (diredp-toggle-find-file-reuse-dir 1)))
+;; (use-package dired+
+;;   :demand t
+;;   :ensure t
+;;   :init
+;;   (progn
+;;     (setq-default diredp-hide-details-initially-flag nil)
+;;     (diredp-toggle-find-file-reuse-dir 1)))
 
 ;; -----------------------------------------------------------------------------
 
