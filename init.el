@@ -87,7 +87,7 @@
 (add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 (delete-selection-mode 1)
 (global-font-lock-mode 1)
-;; (global-prettify-symbols-mode 1)
+(global-prettify-symbols-mode 1)
 (show-paren-mode 1)
 (transient-mark-mode 1)
 
@@ -107,9 +107,16 @@
 
 ;; Override some of the default Emacs interactions for more concise alternatives
 ;; such as allowing Y or N instead of a full Yes or No response to buffer
-;; interactions.
+;; interactions. Additionally, ensure that sensible key bindings are used when
+;; on a Mac.
 
 (defalias 'yes-or-no-p 'y-or-n-p)
+
+(when (eq system-type 'darwin)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier 'alt)
+  (setq mac-right-option-modifier 'none)
+  (global-set-key [kp-delete] 'delete-char))
 
 ;; -----------------------------------------------------------------------------
 
