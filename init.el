@@ -309,7 +309,8 @@
 
 ;; For Dired+, the detailed listing is set as the default, and reuse of a single
 ;; Dired buffer is enabled to avoid cluttering Emacs with hundreds of Dired
-;; buffers.
+;; buffers. Dired+ is loaded from the local packages directory, as it is not
+;; currently available on MELPA or similar.
 
 (use-package dired
   :config
@@ -318,15 +319,18 @@
         (let ((gls "/usr/local/bin/gls"))
           (if (file-exists-p gls)
               (setq insert-directory-program gls))))
-    (setq dired-listing-switches "-lXGh --group-directories-first")))
+    (setq dired-listing-switches "-laXGh --group-directories-first")
 
-;; (use-package dired+
-;;   :demand t
-;;   :ensure t
-;;   :init
-;;   (progn
-;;     (setq-default diredp-hide-details-initially-flag nil)
-;;     (diredp-toggle-find-file-reuse-dir 1)))
+    ;; Dired+
+
+    (load "~/.emacs.d/packages/diredp.el")
+    (diredp-toggle-find-file-reuse-dir 1))
+  :init
+  (progn
+
+    ;; Dired+
+
+    (setq-default diredp-hide-details-initially-flag nil)))
 
 ;; -----------------------------------------------------------------------------
 
