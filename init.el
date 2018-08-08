@@ -334,6 +334,15 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Dockerfile
+
+;; Dockerfile editing mode.
+
+(use-package dockerfile-mode
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Ensime
 
 ;; High level Scala mode, integrating with the external Ensime engine providing

@@ -3,6 +3,7 @@ tramp
 auto-save-list
 elpa
 ensime
+*flycheck*
 *projectile*
 *recentf*
 url
