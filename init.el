@@ -155,13 +155,16 @@
           ("melpa-stable" . "http://stable.melpa.org/packages/")
           ("org"          . "http://orgmode.org/elpa/"))
         package-archive-priorities
-        '(("melpa-stable" . 1))))
+        '(("melpa" . 2)
+          ("melpa-stable" . 1))))
 
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents)
-  (package-install 'use-package))
+  (package-install 'use-package)
+  (package-install 'diminish)
+  (package-install 'bind-key))
 
 (eval-when-compile
   (require 'use-package))
@@ -553,10 +556,10 @@
 ;; A "modern" JavaScript mode, set for all .js files.
 
 (use-package js2-mode
-  :config (setq js-switch-indent-offset 2
-                js-indent-level 2
-                js2-basic-offset 2
-                js2-include-node-externs t)
+  :custom ((js-switch-indent-offset 2)
+           (js-indent-level 2)
+           (js2-basic-offset 2)
+           (js2-include-node-externs t))
   :ensure t
   :mode (("\\.js\\'" . js2-mode)))
 
@@ -601,10 +604,8 @@
   :bind
   (("C-x g"   . magit-status)
    ("C-x M-g" . magit-dispatch-popup))
-  :config
-  (progn
-    (setq magit-completing-read-function 'ivy-completing-read)
-    (global-magit-file-mode))
+  :config (global-magit-file-mode)
+  :custom (magit-completing-read-function 'ivy-completing-read)
   :diminish (auto-revert-mode)
   :ensure t)
 
@@ -653,6 +654,7 @@
 ;; Packages/Projectile
 
 (use-package projectile
+  :bind ("C-c p" . projectile-command-map)
   :config
   (progn
     (setq projectile-completion-system 'ivy
@@ -662,7 +664,7 @@
               (propertize
                (format " Project[%s]" (projectile-project-name))
                'face 'projectile-mode-line))))
-    (projectile-global-mode))
+    (projectile-mode))
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -671,7 +673,8 @@
 
 (use-package purescript-mode
   :config (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
-  :ensure t)
+  :ensure t
+  :mode "\\.purs\\'")
 
 ;; -----------------------------------------------------------------------------
 
