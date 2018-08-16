@@ -296,6 +296,35 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Cyphejor
+
+;; Major mode name customisation system.
+
+(use-package cyphejor
+  :config (cyphejor-mode 1)
+  :custom ((cyphejor-rules
+            '(:downcase
+              ("bookmark"    "→")
+              ("buffer"      "β")
+              ("diff"        "Δ")
+              ("dired"       "δ")
+              ("emacs"       "ε")
+              ("inferior"    "i" :prefix)
+              ("interaction" "i" :prefix)
+              ("interactive" "i" :prefix)
+              ("lisp"        "λ" :postfix)
+              ("menu"        "▤" :postfix)
+              ("mode"        "")
+              ("package"     "↓")
+              ("python"      "π")
+              ("purescript"  "ps")
+              ("shell"       "sh" :postfix)
+              ("text"        "ξ")
+              ("wdired"      "↯δ"))))
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/Dired
 
 ;; Dired and Dired+ configuration, including setting Dired to use the GNU ls
@@ -328,6 +357,13 @@
 
 (use-package dockerfile-mode
   :ensure t)
+
+;; -----------------------------------------------------------------------------
+
+;; Packages/Emacs
+
+(use-package emacs
+  :diminish (eldoc-mode . " ed"))
 
 ;; -----------------------------------------------------------------------------
 
@@ -370,7 +406,13 @@
 
 (use-package flycheck
   :config (global-flycheck-mode)
+  :custom ((flycheck-mode-line-prefix "fc"))
   :ensure t)
+
+(use-package flycheck-color-mode-line
+  :custom ((flycheck-color-mode-line-face-to-color 'mode-line-buffer-id))
+  :ensure t
+  :hook (flycheck-mode . flycheck-color-mode-line-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -636,7 +678,7 @@
                   '(:eval
                     (when (ignore-errors (projectile-project-root))
                       (propertize
-                       (format " Project[%s]" (projectile-project-name))
+                       (format " prj:%s" (projectile-project-name))
                        'face 'projectile-mode-line))))
             (with-no-warnings
               (projectile-mode)))
@@ -648,15 +690,17 @@
 ;; Packages/Purescript
 
 (use-package purescript-mode
+  :diminish "ps"
   :ensure t
-  :hook (progn
-          (psc-ide-mode)
-          (turn-on-purescript-indentation))
   :mode "\\.purs\\'")
 
 (use-package psc-ide
   :custom ((psc-ide-use-npm-bin t))
-  :ensure t)
+  :diminish "ps-ide"
+  :ensure t
+  :hook (purescript-mode . (lambda ()
+                             (psc-ide-mode)
+                             (turn-on-purescript-indentation))))
 
 ;; -----------------------------------------------------------------------------
 

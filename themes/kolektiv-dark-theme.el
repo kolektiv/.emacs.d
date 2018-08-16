@@ -191,6 +191,12 @@
    `(flycheck-info                           ((,class (:underline ,info-1))))
    `(flycheck-warning                        ((,class (:underline ,warning-1))))
 
+   ;; Flycheck Color Mode Line
+
+   `(flycheck-color-mode-line-error-face     ((,class (:foreground ,error-1))))
+   `(flycheck-color-mode-line-warning-face   ((,class (:foreground ,warning-1))))
+   `(flycheck-color-mode-line-success-face   ((,class (:foreground ,success-1))))
+
    ;; Flyspell
 
    `(flyspell-duplicate                      ((,class (:underline ,error-1))))
@@ -266,7 +272,7 @@
 
    ;; Projectile
 
-   `(projectile-mode-line                    ((,class (:foreground ,fg-a+0))))
+   `(projectile-mode-line                    ((,class (:foreground ,fg-a+2))))
 
    ;; Rainbow Delimiters
 
