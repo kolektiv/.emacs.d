@@ -206,11 +206,9 @@
 ;; such as eslint, etc.
 
 (use-package add-node-modules-path
-  :config
-  (progn
-    (add-hook 'js-mode 'add-node-modules-path)
-    (add-hook 'js2-mode-hook 'add-node-modules-path))
-  :ensure t)
+  :ensure t
+  :hook ((js-mode . add-node-modules-path)
+         (js2-mode . add-node-modules-path)))
 
 ;; -----------------------------------------------------------------------------
 
@@ -220,11 +218,10 @@
 ;; as appropriate while editing.
 
 (use-package aggressive-indent
-  :config
-  (progn
-    (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
-    (add-to-list 'aggressive-indent-excluded-modes 'purescript-mode)
-    (global-aggressive-indent-mode 1))
+  :config (progn
+            (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
+            (add-to-list 'aggressive-indent-excluded-modes 'purescript-mode)
+            (global-aggressive-indent-mode 1))
   :diminish (aggressive-indent-mode)
   :ensure t)
 
@@ -245,11 +242,9 @@
 ;; check regularly, in this case once a day.
 
 (use-package auto-package-update
-  :config
-  (progn
-    (setq auto-package-update-delete-old-versions t
-          auto-package-update-interval 1)
-    (auto-package-update-maybe))
+  :config (auto-package-update-maybe)
+  :custom ((auto-package-update-delete-old-versions t)
+           (auto-package-update-interval 1))
   :demand t
   :ensure t)
 
@@ -264,12 +259,10 @@
 
 (use-package company
   :bind (("C-SPC" . company-complete))
-  :config
-  (progn
-    (setq company-auto-complete t
-          company-idle-delay 1
-          company-tooltip-minimum-width 30)
-    (global-company-mode))
+  :custom ((company-auto-complete t)
+           (company-idle-delay 1)
+           (company-tooltip-minimum-width 30))
+  :config (global-company-mode)
   :diminish (company-mode)
   :ensure t)
 
@@ -286,13 +279,12 @@
 ;; to support Ivy/Counsel based find, etc. in projectile-mode.
 
 (use-package counsel
-  :bind
-  (("M-x"     . counsel-M-x)
-   ("C-x C-f" . counsel-find-file)
-   ("C-c g"   . counsel-git)
-   ("C-c j"   . counsel-git-grep)
-   ("C-c k"   . counsel-ag)
-   ("C-c l"   . counsel-locate))
+  :bind (("M-x"     . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-c g"   . counsel-git)
+         ("C-c j"   . counsel-git-grep)
+         ("C-c k"   . counsel-ag)
+         ("C-c l"   . counsel-locate))
   :config (counsel-mode)
   :diminish (counsel-mode)
   :ensure t)
@@ -316,24 +308,15 @@
 ;; currently available on MELPA or similar.
 
 (use-package dired
-  :config
-  (progn
-    (if (eq system-type 'darwin)
-        (let ((gls "/usr/local/bin/gls"))
-          (if (file-exists-p gls)
-              (setq insert-directory-program gls))))
-    (setq dired-listing-switches "-laXGh --group-directories-first")
-
-    ;; Dired+
-
-    (load "~/.emacs.d/packages/diredp.el")
-    (diredp-toggle-find-file-reuse-dir 1))
-  :init
-  (progn
-
-    ;; Dired+
-
-    (setq-default diredp-hide-details-initially-flag nil)))
+  :config (progn
+            (if (eq system-type 'darwin)
+                (let ((gls "/usr/local/bin/gls"))
+                  (if (file-exists-p gls)
+                      (setq insert-directory-program gls))))
+            (load "~/.emacs.d/packages/diredp.el")
+            (diredp-toggle-find-file-reuse-dir 1))
+  :custom ((dired-listing-switches "-laXGh --group-directories-first"))
+  :init (setq-default diredp-hide-details-initially-flag nil))
 
 ;; -----------------------------------------------------------------------------
 
@@ -398,16 +381,12 @@
 ;; C-; - note that save functionality is then available using Ivy actions.
 
 (use-package flyspell
-  :config
-  (progn
-    (setq flyspell-sort-corrections nil
-          ispell-dictionary "british-ise-w_accents"
-          ispell-program-name "aspell")
-    ;; Uncomment following for flyspell of prog-mode comments and strings.
-    ;; (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-    (add-hook 'text-mode-hook 'flyspell-mode))
+  :custom ((flyspell-sort-corrections nil)
+           (ispell-dictionary "british-ise-w_accents")
+           (ispell-program-name "aspell"))
   :diminish flyspell-mode
-  :ensure t)
+  :ensure t
+  :hook (text-mode . flyspell-mode))
 
 (use-package flyspell-correct-ivy
   :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-previous-word-generic))
@@ -424,21 +403,20 @@
 ;; frontend popup will be displayed after the fill column indicator character.
 
 (use-package fill-column-indicator
-  :config
-  (progn
-    (eval-when-compile
-      (defun suspend-fci-mode (command)
-        (when (string= "show" command)
-          (turn-off-fci-mode))
-        (when (string= "hide" command)
-          (turn-on-fci-mode))))
-    (advice-add 'company-call-frontends :before #'suspend-fci-mode)
-    (setq fci-rule-color "#3a3a3a"
-          fci-rule-column 80
-          fci-rule-use-dashes nil)
-    (add-hook 'prog-mode-hook 'turn-on-fci-mode))
+  :config (progn
+            (eval-when-compile
+              (defun suspend-fci-mode (command)
+                (when (string= "show" command)
+                  (turn-off-fci-mode))
+                (when (string= "hide" command)
+                  (turn-on-fci-mode))))
+            (advice-add 'company-call-frontends :before #'suspend-fci-mode))
+  :custom ((fci-rule-color "#3a3a3a")
+           (fci-rule-column 80)
+           (fci-rule-use-dashes nil))
   :disabled t
-  :ensure t)
+  :ensure t
+  :hook (prog-mode turn-on-fci-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -468,14 +446,12 @@
 ;; after 2 seconds, without waiting for save (the default).
 
 (use-package git-gutter
-  :config
-  (progn
-    (setq git-gutter:added-sign "++"
-          git-gutter:always-show-separator t
-          git-gutter:deleted-sign "--"
-          git-gutter:modified-sign "=="
-          git-gutter:update-interval 2)
-    (global-git-gutter-mode 1))
+  :config (global-git-gutter-mode 1)
+  :custom ((git-gutter:added-sign "++")
+           (git-gutter:always-show-separator t)
+           (git-gutter:deleted-sign "--")
+           (git-gutter:modified-sign "==")
+           (git-gutter:update-interval 2))
   :diminish (git-gutter-mode)
   :ensure t)
 
@@ -513,8 +489,8 @@
 ;; Haskell indentation integration with haskell-mode.
 
 (use-package hindent
-  :config (add-hook 'haskell-mode-hook #'hindent-mode)
-  :ensure t)
+  :ensure t
+  :hook (haskell-mode . hindent-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -535,17 +511,16 @@
 
 (use-package ivy
   :bind ("C-c C-r" . ivy-resume)
-  :config
-  (progn
-    (setq ivy-count-format "(%d/%d) "
-          ivy-format-function 'ivy-format-function-line
-          ivy-initial-inputs-alist nil
-          ivy-re-builders-alist '((t . ivy--regex-fuzzy))
-          ivy-use-virtual-buffers t
-          ivy-wrap t)
-    (add-to-list 'ivy-ignore-buffers "\\*magit")
-    (add-to-list 'ivy-ignore-buffers "\\*Flycheck")
-    (ivy-mode 1))
+  :config (progn
+            (add-to-list 'ivy-ignore-buffers "\\*magit")
+            (add-to-list 'ivy-ignore-buffers "\\*Flycheck")
+            (ivy-mode 1))
+  :custom ((ivy-count-format "(%d/%d) ")
+           (ivy-format-function 'ivy-format-function-line)
+           (ivy-initial-inputs-alist nil)
+           (ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+           (ivy-use-virtual-buffers t)
+           (ivy-wrap t))
   :diminish (ivy-mode)
   :ensure t)
 
@@ -601,9 +576,8 @@
 ;; behaviour.
 
 (use-package magit
-  :bind
-  (("C-x g"   . magit-status)
-   ("C-x M-g" . magit-dispatch-popup))
+  :bind (("C-x g"   . magit-status)
+         ("C-x M-g" . magit-dispatch-popup))
   :config (global-magit-file-mode)
   :custom (magit-completing-read-function 'ivy-completing-read)
   :diminish (auto-revert-mode)
@@ -621,19 +595,18 @@
 
 (use-package markdown-mode
   :commands (gfm-mode markdown-mode)
-  :config (setq markdown-command "multimarkdown")
+  :custom ((markdown-command "multimarkdown"))
   :ensure t
-  :mode
-  (("README\\.md\\'" . gfm-mode)
-   ("\\.md\\'"       . markdown-mode)
-   ("\\.markdown\\'" . markdown-mode)))
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'"       . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)))
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Org
 
 (use-package org
-  :config (setq org-startup-indented t)
+  :custom ((org-startup-indented t))
   :ensure org-plus-contrib
   :pin org)
 
@@ -642,8 +615,8 @@
 ;; Packages/PlantUML
 
 (use-package plantuml-mode
-  :mode (("\\.plantuml\\'" . plantuml-mode-map))
-  :ensure t)
+  :ensure t
+  :mode (("\\.plantuml\\'" . plantuml-mode-map)))
 
 (use-package flycheck-plantuml
   :config (flycheck-plantuml-setup)
@@ -655,16 +628,15 @@
 
 (use-package projectile
   :bind ("C-c p" . projectile-command-map)
-  :config
-  (progn
-    (setq projectile-completion-system 'ivy
-          projectile-mode-line
-          '(:eval
-            (when (ignore-errors (projectile-project-root))
-              (propertize
-               (format " Project[%s]" (projectile-project-name))
-               'face 'projectile-mode-line))))
-    (projectile-mode))
+  :config (progn
+            (setq projectile-mode-line
+                  '(:eval
+                    (when (ignore-errors (projectile-project-root))
+                      (propertize
+                       (format " Project[%s]" (projectile-project-name))
+                       'face 'projectile-mode-line))))
+            (projectile-mode))
+  :custom ((projectile-completion-system 'ivy))
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -672,17 +644,23 @@
 ;; Packages/Purescript
 
 (use-package purescript-mode
-  :config (add-hook 'purescript-mode-hook 'turn-on-purescript-indentation)
   :ensure t
+  :hook (progn
+          (psc-ide-mode)
+          (turn-on-purescript-indentation))
   :mode "\\.purs\\'")
+
+(use-package psc-ide
+  :custom ((psc-ide-use-npm-bin t))
+  :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/Rainbow-Delimiters
 
 (use-package rainbow-delimiters
-  :config (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-  :ensure t)
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -691,9 +669,9 @@
 ;; Display colour codes visually within buffers (hex, X, etc.)
 
 (use-package rainbow-mode
-  :config (add-hook 'prog-mode-hook 'rainbow-mode)
   :diminish (rainbow-mode)
-  :ensure t)
+  :ensure t
+  :hook (prog-mode . rainbow-mode))
 
 ;; -----------------------------------------------------------------------------
 
@@ -731,11 +709,9 @@
 ;; Packages/TIDE
 
 (use-package tide
-  :config
-  (progn
-    (add-hook 'before-save-hook 'tide-format-before-save)
-    (add-hook 'typescript-mode-hook 'tide-setup))
-  :ensure t)
+  :ensure t
+  :hook ((before-save . tide-format-before-save)
+         (typescript-mode . tide-setup)))
 
 ;; -----------------------------------------------------------------------------
 
@@ -750,9 +726,8 @@
 ;; Packages/Uniquify
 
 (use-package uniquify
-  :config
-  (setq uniquify-buffer-name-style 'forward
-        uniquify-separator "/")
+  :custom ((uniquify-buffer-name-style 'forward)
+           (uniquify-separator "/"))
   :demand t)
 
 ;; -----------------------------------------------------------------------------
@@ -760,11 +735,9 @@
 ;; Packages/YAML
 
 (use-package yaml-mode
-  :config
-  (progn
-    (add-hook 'yaml-mode-hook 'turn-off-flyspell)
-    (add-hook 'yaml-mode-hook 'turn-on-fci-mode))
-  :ensure t)
+  :ensure t
+  :hook ((yaml-mode . turn-off-flyspell)
+         (yaml-mode . turn-on-fci-mode)))
 
 ;; =============================================================================
 
