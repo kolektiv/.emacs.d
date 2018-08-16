@@ -262,7 +262,8 @@
   :custom ((company-auto-complete t)
            (company-idle-delay 1)
            (company-tooltip-minimum-width 30))
-  :config (global-company-mode)
+  :config (with-no-warnings
+            (global-company-mode))
   :diminish (company-mode)
   :ensure t)
 
@@ -314,7 +315,8 @@
                   (if (file-exists-p gls)
                       (setq insert-directory-program gls))))
             (load "~/.emacs.d/packages/diredp.el")
-            (diredp-toggle-find-file-reuse-dir 1))
+            (with-no-warnings
+              (diredp-toggle-find-file-reuse-dir 1)))
   :custom ((dired-listing-switches "-laXGh --group-directories-first"))
   :init (setq-default diredp-hide-details-initially-flag nil))
 
@@ -514,14 +516,15 @@
   :config (progn
             (add-to-list 'ivy-ignore-buffers "\\*magit")
             (add-to-list 'ivy-ignore-buffers "\\*Flycheck")
-            (ivy-mode 1))
+            (with-no-warnings
+              (ivy-mode 1)))
   :custom ((ivy-count-format "(%d/%d) ")
            (ivy-format-function 'ivy-format-function-line)
            (ivy-initial-inputs-alist nil)
            (ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
            (ivy-use-virtual-buffers t)
            (ivy-wrap t))
-  :diminish (ivy-mode)
+  :diminish ivy-mode
   :ensure t)
 
 ;; -----------------------------------------------------------------------------
@@ -635,7 +638,8 @@
                       (propertize
                        (format " Project[%s]" (projectile-project-name))
                        'face 'projectile-mode-line))))
-            (projectile-mode))
+            (with-no-warnings
+              (projectile-mode)))
   :custom ((projectile-completion-system 'ivy))
   :ensure t)
 
