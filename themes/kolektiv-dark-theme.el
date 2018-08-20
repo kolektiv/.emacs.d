@@ -287,6 +287,10 @@
    `(rainbow-delimiters-mismatched-face      ((,class (:foreground ,warning-1))))
    `(rainbow-delimiters-unmatched-face       ((,class (:foreground ,error-1))))
 
+   ;; Tide
+
+   `(tide-hl-identifier-face                 ((,class (:background ,bg-a+2))))
+
    ;; Version Control
 
    `(vc-state-base                           ((,class (:foreground ,fg-a-3))))

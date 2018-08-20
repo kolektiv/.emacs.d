@@ -221,6 +221,7 @@
   :config (progn
             (add-to-list 'aggressive-indent-excluded-modes 'haskell-mode)
             (add-to-list 'aggressive-indent-excluded-modes 'purescript-mode)
+            (add-to-list 'aggressive-indent-excluded-modes 'typescript-mode)
             (global-aggressive-indent-mode 1))
   :diminish (aggressive-indent-mode)
   :ensure t)
@@ -757,15 +758,19 @@
 ;; Packages/TIDE
 
 (use-package tide
+  :custom ((tide-completion-detailed t)
+           (tide-hl-identifier-idle-time 0))
   :ensure t
   :hook ((before-save . tide-format-before-save)
-         (typescript-mode . tide-setup)))
+         (typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)))
 
 ;; -----------------------------------------------------------------------------
 
 ;; Packages/TypeScript
 
 (use-package typescript-mode
+  :custom ((typescript-indent-level 2))
   :ensure t
   :mode (("\\.ts\\'" . typescript-mode)))
 
