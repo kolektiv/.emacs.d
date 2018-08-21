@@ -208,7 +208,8 @@
 (use-package add-node-modules-path
   :ensure t
   :hook ((js-mode . add-node-modules-path)
-         (js2-mode . add-node-modules-path)))
+         (js2-mode . add-node-modules-path)
+         (typescript-mode . add-node-modules-path)))
 
 ;; -----------------------------------------------------------------------------
 
@@ -758,7 +759,7 @@
 ;; Packages/TIDE
 
 (use-package tide
-  :custom ((tide-completion-detailed t)
+  :custom ((tide-completion-detailed nil)
            (tide-hl-identifier-idle-time 0))
   :ensure t
   :hook ((before-save . tide-format-before-save)
