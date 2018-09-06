@@ -178,6 +178,7 @@
    `(font-lock-constant-face                 ((,class (:foreground ,fg-a+4))))
    `(font-lock-function-name-face            ((,class (:foreground ,fg-a+5 :weight normal))))
    `(font-lock-keyword-face                  ((,class (:foreground ,fg-a+3))))
+   `(font-lock-preprocessor-face             ((,class (:foreground ,fg-a-2))))
    `(font-lock-string-face                   ((,class (:foreground ,fg-a+1 :background ,bg-a+1))))
    `(font-lock-type-face                     ((,class (:foreground ,fg-a+5 :weight normal))))
    `(font-lock-variable-name-face            ((,class (:foreground ,fg-a+4))))
