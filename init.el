@@ -630,11 +630,10 @@
   :diminish (auto-revert-mode)
   :ensure t)
 
-(use-package magithub
-  :after magit
-  :config (magithub-feature-autoinject t)
-  :disabled t
-  :ensure t)
+;; (use-package magithub
+;;   :after magit
+;;   :config (magithub-feature-autoinject t)
+;;   :ensure t)
 
 ;; -----------------------------------------------------------------------------
 
@@ -725,6 +724,15 @@
 
 ;; -----------------------------------------------------------------------------
 
+;; Packages/Rust
+
+;; Rust Mode.
+
+(use-package rust-mode
+  :ensure t)
+
+;; -----------------------------------------------------------------------------
+
 ;; Packages/SBT
 
 (use-package sbt-mode
@@ -762,7 +770,9 @@
   :custom ((tide-completion-detailed nil)
            (tide-hl-identifier-idle-time 0))
   :ensure t
-  :hook ((before-save . tide-format-before-save)
+  :hook (
+         ;; (before-save . tide-format-before-save)
+
          (typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)))
 
@@ -791,7 +801,7 @@
 (use-package yaml-mode
   :ensure t
   :hook ((yaml-mode . turn-off-flyspell)
-         (yaml-mode . turn-on-fci-mode)))
+         (yaml-mode . fci-mode)))
 
 ;; =============================================================================
 
