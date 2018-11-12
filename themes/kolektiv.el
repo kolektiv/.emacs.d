@@ -1,4 +1,4 @@
-;;; kolektiv-dark-theme.el --- Personal Theme
+;;; kolektiv.el --- Personal Theme
 
 ;; Author: Andrew Cherry <andrew@xyncro.com>
 ;; URL: https://github.com/kolektiv/.emacs.d
@@ -304,6 +304,6 @@
 
 ;; Provide
 
-(provide-theme 'kolektiv-dark)
+(provide-theme 'kolektiv)
 
-;;; kolektiv-dark-theme.el ends here
+;;; kolektiv.el ends here

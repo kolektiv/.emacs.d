@@ -177,12 +177,11 @@
 ;; Core / Theme
 
 ;; Add local themes to the custom theme load path, then load the kolektiv custom
-;; theme (dark variant) without prompting (as it's theoretically trusted local
-;; code).
+;; theme without prompting (as it's theoretically trusted local code).
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 
-(load-theme 'kolektiv-dark t)
+(load-theme 'kolektiv t)
 
 ;; ==============================================================================
 
