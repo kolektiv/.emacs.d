@@ -10,14 +10,14 @@
 
 ;;; Code:
 
-;; =============================================================================
+;; ==============================================================================
 
 ;; Groups and Faces
 
 ;; Custom faces and groups are defined where applicable, due to the need for
 ;; more granularity of control over some package faces.
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
 ;; Projectile
 
@@ -31,7 +31,7 @@
   "Face used for projectile-mode-line information."
   :group 'projectile-faces)
 
-;; =============================================================================
+;; ==============================================================================
 
 ;; Theme
 
@@ -273,7 +273,7 @@
 
    ;; Projectile
 
-   `(projectile-mode-line                    ((,class (:foreground ,fg-a+2))))
+   `(projectile-mode-line                    ((,class (:foreground ,fg-a+4))))
 
    ;; Rainbow Delimiters
 
@@ -300,7 +300,7 @@
    `(vc-locally-added-state                  ((,class (:foreground ,fg-a+0 :underline t))))
    `(vc-removed-state                        ((,class (:foreground ,fg-a+0 :strike-through t))))))
 
-;; =============================================================================
+;; ==============================================================================
 
 ;; Provide
 

@@ -17,7 +17,7 @@
 
 ;;; Code:
 
-;; =============================================================================
+;; ==============================================================================
 
 ;; Core
 
@@ -25,9 +25,9 @@
 ;; thus configured "raw" rather than configured lazily using use-package as
 ;; configured in the latter part of the init file.
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/Backups
+;; Core / Backups
 
 ;; Override the default Emacs automatic backup behaviour to avoid polluting
 ;; working directories with backup and temporary copies of files. Ensure a
@@ -41,18 +41,18 @@
       kept-new-versions 10
       version-control t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/Common Lisp
+;; Core / Common Lisp
 
 ;; Allow the use of Common Lisp style programming features within Emacs Lisp
 ;; where useful.
 
 (require 'cl-lib)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/Customisation
+;; Core / Customisation
 
 ;; Settings for custom mode, along with configuration to use a discrete
 ;; custom.el file instead of storing customized values within init.el.
@@ -64,9 +64,9 @@
 
 (load custom-file)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/Editing
+;; Core / Editing
 
 ;; Set the preferences for global editing to sensible defaults, including line
 ;; and column numbers, newline handling, tabs, and any other general text
@@ -91,9 +91,9 @@
 (show-paren-mode 1)
 (transient-mark-mode 1)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/ERC
+;; Core / ERC
 
 ;; Set the preferences for ERC to suitable defaults.
 
@@ -101,9 +101,9 @@
               erc-away-nickname "kolektiv.afk"
               erc-nick "kolektiv")
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/Interaction
+;; Core / Interaction
 
 ;; Override some of the default Emacs interactions for more concise alternatives
 ;; such as allowing Y or N instead of a full Yes or No response to buffer
@@ -118,9 +118,9 @@
   (setq mac-right-option-modifier 'none)
   (global-set-key [kp-delete] 'delete-char))
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/Interface
+;; Core / Interface
 
 ;; Set preferences for UI options, including the removal of surplus chrome,
 ;; toolbars, and other graphical widgets which duplicate functionality better
@@ -137,9 +137,9 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/Package Management
+;; Core / Package Management
 
 ;; Configure the Emacs built-in package management tooling to use the correct
 ;; set of repositories with appropriate priorities, and use the use-package
@@ -172,9 +172,9 @@
 (require 'diminish)
 (require 'bind-key)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Core/Theme
+;; Core / Theme
 
 ;; Add local themes to the custom theme load path, then load the kolektiv custom
 ;; theme (dark variant) without prompting (as it's theoretically trusted local
@@ -184,39 +184,18 @@
 
 (load-theme 'kolektiv-dark t)
 
-;; =============================================================================
+;; ==============================================================================
 
-;; Packages
+;; Extensions
 
-;; Specific packages, required and managed via use-package, adding features and
-;; modes as required. Extensions to specific packages (for example, counsel and
-;; counsel-projectile) are included as part of the main "parent" package where
-;; appropriate.
+;; Packages (managed via the use-package macro) for extensionsfunctionality such
+;; as completion, search, mini-buffer facilities, etc.
 
-;; Configuration of packages *used by* other packages is located in the using
-;; package (for example, ivy completion for projectile is configured in
-;; projectile).
+;; ------------------------------------------------------------------------------
 
-;; -----------------------------------------------------------------------------
+;; Extensions / Aggressive Indent
 
-;; Packages/Add-Node-Modules-Path
-
-;; Add the node_modules/.bin/ directory to the local exec-path when it is found
-;; in a parent directory, allowing tools to use local node installs of tools
-;; such as eslint, etc.
-
-(use-package add-node-modules-path
-  :ensure t
-  :hook ((js-mode . add-node-modules-path)
-         (js2-mode . add-node-modules-path)
-         (typescript-mode . add-node-modules-path)))
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Aggressive-Indent
-
-;; Make re-indentation of code more aggressive, continually re-aligning things
-;; as appropriate while editing.
+;; Aggressive indenting, on the fly re-indenting while editing.
 
 (use-package aggressive-indent
   :config (progn
@@ -227,18 +206,9 @@
   :diminish (aggressive-indent-mode)
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Alchemist (Elixir)
-
-;; Elixir/Mix integration/IDE.
-
-(use-package alchemist
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Auto-Package-Update
+;; Extensions / Auto Package Update
 
 ;; Keep packages up to date, removing old packages. Override the periodicity to
 ;; check regularly, in this case once a day.
@@ -250,9 +220,9 @@
   :demand t
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Company
+;; Extensions / Company
 
 ;; Company mode enabled globally, for use with modes which integrate in
 ;; particular. Also added is company-flx, which enables fuzzy matching for
@@ -273,9 +243,9 @@
   :config (company-flx-mode 1)
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Counsel
+;; Extensions / Counsel
 
 ;; Better M-x and related functions, using the underlying Ivy support for better
 ;; completion modes. Light and effective. Projectile integration is also added
@@ -296,11 +266,12 @@
   :config (counsel-projectile-mode)
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Cyphejor
+;; Extensions / Cyphejor
 
-;; Major mode name customisation system.
+;; Major mode name customisation system, shortening/cypher-ing commonly used
+;; names to de-clutter the mode line.
 
 (use-package cyphejor
   :config (cyphejor-mode 1)
@@ -325,9 +296,9 @@
               ("wdired"      "↯δ"))))
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Dired
+;; Extensions / Dired (and Dired+)
 
 ;; Dired and Dired+ configuration, including setting Dired to use the GNU ls
 ;; implementation if running on OS X and the implementation has been installed
@@ -351,46 +322,26 @@
   :custom ((dired-listing-switches "-laXGh --group-directories-first"))
   :init (setq-default diredp-hide-details-initially-flag nil))
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Dockerfile
-
-;; Dockerfile editing mode.
-
-(use-package dockerfile-mode
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Emacs
+;; Extensions / Emacs
 
 (use-package emacs
   :diminish (eldoc-mode . " ed"))
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Ensime
+;; Extensions / Ethan WSpace
 
-;; High level Scala mode, integrating with the external Ensime engine providing
-;; more advanced code analysis, completion, checking, etc. than the purely
-;; syntactical analysis availble from the more basic scala-mode (on top of which
-;; Ensime is built).
-
-(use-package ensime
-  :disabled t
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Ethan-WSpace
+;; Globally configured whitespace management and removal.
 
 (use-package ethan-wspace
   :config (global-ethan-wspace-mode 1)
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Exec-Path-From-Shell
+;; Extensions / Exec Path From Shell
 
 ;; Ensure that the path is initialized from environment settings defined and
 ;; configured by the appropriate shell.
@@ -399,9 +350,33 @@
   :config (exec-path-from-shell-initialize)
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Flycheck
+;; Extensions / Fill Column Indicator
+
+;; Fill column indicator (configured for a classic 80 column width). A function
+;; to temporarily suspend fci-mode is configured, and run when company-mode is
+;; actively displaying a frontend. This prevents a positioning bug where the
+;; frontend popup will be displayed after the fill column indicator character.
+
+(use-package fill-column-indicator
+  :config (progn
+            (eval-when-compile
+              (defun suspend-fci-mode (command)
+                (when (string= "show" command)
+                  (turn-off-fci-mode))
+                (when (string= "hide" command)
+                  (turn-on-fci-mode))))
+            (advice-add 'company-call-frontends :before #'suspend-fci-mode))
+  :custom ((fci-rule-color "#1c1c1c")
+           (fci-rule-column 80)
+           (fci-rule-use-dashes nil))
+  :ensure t
+  :hook (prog-mode . fci-mode))
+
+;; ------------------------------------------------------------------------------
+
+;; Extensions / Flycheck
 
 ;; Integrates external checking processes with buffer editing, providing
 ;; in-place warning, error, etc. notification via highlighting and tool tips.
@@ -416,9 +391,13 @@
   :ensure t
   :hook (flycheck-mode . flycheck-color-mode-line-mode))
 
-;; -----------------------------------------------------------------------------
+(use-package flycheck-inline
+  :ensure t
+  :hook (flycheck-mode . flycheck-inline-mode))
 
-;; Packages/Flyspell
+;; ------------------------------------------------------------------------------
+
+;; Extensions / Flyspell
 
 ;; Use Flyspell automatically for appropriate modes, and use likeness-based
 ;; correction matching in the case of multiple potential corrections.
@@ -439,34 +418,9 @@
   :demand t
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Fill-Column-Indicator
-
-;; Fill column indicator (configured for a classic 80 column width). A function
-;; to temporarily suspend fci-mode is configured, and run when company-mode is
-;; actively displaying a frontend. This prevents a positioning bug where the
-;; frontend popup will be displayed after the fill column indicator character.
-
-(use-package fill-column-indicator
-  :config (progn
-            (eval-when-compile
-              (defun suspend-fci-mode (command)
-                (when (string= "show" command)
-                  (turn-off-fci-mode))
-                (when (string= "hide" command)
-                  (turn-on-fci-mode))))
-            (advice-add 'company-call-frontends :before #'suspend-fci-mode))
-  :custom ((fci-rule-color "#3a3a3a")
-           (fci-rule-column 80)
-           (fci-rule-use-dashes nil))
-  :disabled t
-  :ensure t
-  :hook (prog-mode turn-on-fci-mode))
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Flx
+;; Extensions / Flx
 
 ;; Fuzzy matching, used by Ivy and Counsel for the fuzzy search preferred for
 ;; general usage.
@@ -474,18 +428,18 @@
 (use-package flx
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Focus
+;; Extensions / Focus
 
 ;; Focus mode, diminishing unfocused text while reading/editing.
 
 (use-package focus
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Git-Gutter
+;; Extensions / Git-Gutter
 
 ;; Show changes from the current Git version of a file in the left hand gutter,
 ;; indicating changes through slightly customised symbols. Automatically update
@@ -501,55 +455,21 @@
   :diminish (git-gutter-mode)
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/GraphQL
+;; Extensions / Indent Guide
 
-;; A graphql major mode for editing graphql schema.
-
-(use-package graphql-mode
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Haskell
-
-;; Haskell mode
-
-(use-package haskell-mode
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/HCL
-
-;; Hashicorp Configuration Language mode, highlighting basic HCL.
-
-(use-package hcl-mode
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/HIndent
-
-;; Haskell indentation integration with haskell-mode.
-
-(use-package hindent
-  :ensure t
-  :hook (haskell-mode . hindent-mode))
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Indent-Guide
+;; Shows a vertical indent guide to help determine appropriate levels of
+;; indentation in indentation-relevant languages.
 
 (use-package indent-guide
   :config (indent-guide-global-mode)
   :diminish (indent-guide-mode)
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Ivy
+;; Extensions / Ivy
 
 ;; Ivy completion matching framework, underlying the Counsel and Swiper
 ;; implementations. Configured to taste, particularly around the fuzzy matching
@@ -571,11 +491,129 @@
   :diminish ivy-mode
   :ensure t)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/JS2
+;; Extensions / Magit
 
-;; A "modern" JavaScript mode, set for all .js files.
+;; Powerful and comprehensive Git porcelain avoiding the need to move outside of
+;; Emacs for version control management. Integrated with Ivy and enabled
+;; globally.
+
+(use-package magit
+  :bind (("C-x g"   . magit-status)
+         ("C-x M-g" . magit-dispatch-popup))
+  :config (global-magit-file-mode)
+  :custom (magit-completing-read-function 'ivy-completing-read)
+  :diminish (auto-revert-mode)
+  :ensure t)
+
+;; ------------------------------------------------------------------------------
+
+;; Extensions / Projectile
+
+;; Global projectile management/switching system, allowing fast access to
+;; a logical "project" (by default a Git repository).
+
+(use-package projectile
+  :bind ("C-c p" . projectile-command-map)
+  :config (with-no-warnings
+            (projectile-mode +1))
+  :custom ((projectile-completion-system 'ivy)
+           (projectile-mode-line-function
+            '(lambda ()
+               (when (ignore-errors (projectile-project-root))
+                 (propertize
+                  (format " prj:%s" (projectile-project-name))
+                  'face '(:foreground "orange"))))))
+  :ensure t)
+
+;; ------------------------------------------------------------------------------
+
+;; Extensions / Rainbow Delimiters
+
+(use-package rainbow-delimiters
+  :ensure t
+  :hook (prog-mode . rainbow-delimiters-mode))
+
+;; ------------------------------------------------------------------------------
+
+;; Extensions / Rainbow
+
+;; Display colour codes visually within buffers (hex, X, etc.)
+
+(use-package rainbow-mode
+  :diminish (rainbow-mode)
+  :ensure t
+  :hook (prog-mode . rainbow-mode))
+
+;; ------------------------------------------------------------------------------
+
+;; Extensions / Swiper
+
+(use-package swiper
+  :bind ("C-s" . swiper)
+  :ensure t)
+
+;; ------------------------------------------------------------------------------
+
+;; Extensions / Uniquify
+
+(use-package uniquify
+  :custom ((uniquify-buffer-name-style 'forward)
+           (uniquify-separator "/"))
+  :demand t)
+
+;; ==============================================================================
+
+;; Languages
+
+;; Packages (managed via the use-package macro) for functionality for working
+;; with specific languages or language families.
+
+;; ------------------------------------------------------------------------------
+
+;; Languages / Docker
+
+(use-package dockerfile-mode
+  :ensure t)
+
+;; ------------------------------------------------------------------------------
+
+;; Languages / GraphQL
+
+(use-package graphql-mode
+  :ensure t)
+
+;; ------------------------------------------------------------------------------
+
+;; Languages / Haskell
+
+(use-package haskell-mode
+  :ensure t)
+
+(use-package hindent
+  :ensure t
+  :hook (haskell-mode . hindent-mode))
+
+;; ------------------------------------------------------------------------------
+
+;; Languages / HCL (with Terraform, etc)
+
+;; HCL
+
+(use-package hcl-mode
+  :ensure t)
+
+;; Terraform
+
+(use-package terraform-mode
+  :ensure t)
+
+;; ------------------------------------------------------------------------------
+
+;; Languages / JavaScript (plus JSON), TypeScript, and Node
+
+;; JavaScript
 
 (use-package js2-mode
   :custom ((js-switch-indent-offset 2)
@@ -585,11 +623,10 @@
   :ensure t
   :mode (("\\.js\\'" . js2-mode)))
 
-;; -----------------------------------------------------------------------------
+(use-package rjsx-mode
+  :ensure t)
 
-;; Packages/JSON
-
-;; JSON support.
+;; JSON
 
 (use-package json-mode
   :config
@@ -600,44 +637,31 @@
   :ensure t
   :mode (("\\.json\\'" . json-mode)))
 
-;; -----------------------------------------------------------------------------
+;; TypeScript
 
-;; Packages/JSX
+(use-package tide
+  :custom ((tide-completion-detailed nil)
+           (tide-hl-identifier-idle-time 0))
+  :ensure t
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)))
 
-;; JSX support (using rjsx-mode) for React JS, including support for embedded
-;; markup, etc.
+(use-package typescript-mode
+  :custom ((typescript-indent-level 2))
+  :ensure t
+  :mode (("\\.ts\\'" . typescript-mode)))
 
-(use-package rjsx-mode
-  :ensure t)
+;; Node
 
-;; -----------------------------------------------------------------------------
+(use-package add-node-modules-path
+  :ensure t
+  :hook ((js-mode . add-node-modules-path)
+         (js2-mode . add-node-modules-path)
+         (typescript-mode . add-node-modules-path)))
 
-;; Packages/Magit
+;; ------------------------------------------------------------------------------
 
-;; Powerful and comprehensive Git porcelain avoiding the need to move outside of
-;; Emacs for version control management. Integrated with Ivy and enabled
-;; globally.
-
-;; Magithub is included to provide additional integration with Github through
-;; the Magit porcelain. This is currently disabled given slightly odd process
-;; behaviour.
-
-(use-package magit
-  :bind (("C-x g"   . magit-status)
-         ("C-x M-g" . magit-dispatch-popup))
-  :config (global-magit-file-mode)
-  :custom (magit-completing-read-function 'ivy-completing-read)
-  :diminish (auto-revert-mode)
-  :ensure t)
-
-;; (use-package magithub
-;;   :after magit
-;;   :config (magithub-feature-autoinject t)
-;;   :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Markdown
+;; Languages / Markdown
 
 (use-package markdown-mode
   :commands (gfm-mode markdown-mode)
@@ -647,48 +671,18 @@
          ("\\.md\\'"       . markdown-mode)
          ("\\.markdown\\'" . markdown-mode)))
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Org
+;; Languages / Org
 
 (use-package org
   :custom ((org-startup-indented t))
   :ensure org-plus-contrib
   :pin org)
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/PlantUML
-
-(use-package plantuml-mode
-  :ensure t
-  :mode (("\\.plantuml\\'" . plantuml-mode-map)))
-
-(use-package flycheck-plantuml
-  :config (flycheck-plantuml-setup)
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Projectile
-
-(use-package projectile
-  :bind ("C-c p" . projectile-command-map)
-  :config (progn
-            (setq projectile-mode-line
-                  '(:eval
-                    (when (ignore-errors (projectile-project-root))
-                      (propertize
-                       (format " prj:%s" (projectile-project-name))
-                       'face 'projectile-mode-line))))
-            (with-no-warnings
-              (projectile-mode)))
-  :custom ((projectile-completion-system 'ivy))
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Purescript
+;; Languages / Purescript
 
 (use-package purescript-mode
   :diminish "ps"
@@ -703,100 +697,45 @@
                              (psc-ide-mode)
                              (turn-on-purescript-indentation))))
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Rainbow-Delimiters
+;; Languages / PlantUML
 
-(use-package rainbow-delimiters
+(use-package plantuml-mode
   :ensure t
-  :hook (prog-mode . rainbow-delimiters-mode))
+  :mode (("\\.plantuml\\'" . plantuml-mode-map)))
 
-;; -----------------------------------------------------------------------------
+(use-package flycheck-plantuml
+  :config (flycheck-plantuml-setup)
+  :ensure t)
 
-;; Packages/Rainbow
+;; ------------------------------------------------------------------------------
 
-;; Display colour codes visually within buffers (hex, X, etc.)
+;; Languages / Rust
 
-(use-package rainbow-mode
-  :diminish (rainbow-mode)
-  :ensure t
-  :hook (prog-mode . rainbow-mode))
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Rust
-
-;; Rust Mode.
+;; Rust
 
 (use-package rust-mode
   :ensure t)
 
-;; -----------------------------------------------------------------------------
-
-;; Packages/SBT
-
-(use-package sbt-mode
-  :commands (sbt-command sbt-start)
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Scala
-
-(use-package scala-mode
+(use-package flycheck-rust
   :ensure t
-  :interpreter ("scala" . scala-mode))
+  :hook (flycheck-mode . flycheck-rust-setup))
 
-;; -----------------------------------------------------------------------------
-
-;; Packages/Swiper
-
-(use-package swiper
-  :bind ("C-s" . swiper)
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/Terraform
-
-(use-package terraform-mode
-  :ensure t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/TIDE
-
-(use-package tide
-  :custom ((tide-completion-detailed nil)
-           (tide-hl-identifier-idle-time 0))
+(use-package racer
   :ensure t
-  :hook (
-         ;; (before-save . tide-format-before-save)
+  :hook ((rust-mode . racer-mode)
+         (racer-mode . eldoc-mode)))
 
-         (typescript-mode . tide-setup)
-         (typescript-mode . tide-hl-identifier-mode)))
+;; Cargo
 
-;; -----------------------------------------------------------------------------
-
-;; Packages/TypeScript
-
-(use-package typescript-mode
-  :custom ((typescript-indent-level 2))
+(use-package cargo
   :ensure t
-  :mode (("\\.ts\\'" . typescript-mode)))
+  :hook (rust-mode . cargo-minor-mode))
 
-;; -----------------------------------------------------------------------------
+;; ------------------------------------------------------------------------------
 
-;; Packages/Uniquify
-
-(use-package uniquify
-  :custom ((uniquify-buffer-name-style 'forward)
-           (uniquify-separator "/"))
-  :demand t)
-
-;; -----------------------------------------------------------------------------
-
-;; Packages/YAML
+;; Languages / YAML
 
 (use-package yaml-mode
   :ensure t
