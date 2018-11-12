@@ -1,4 +1,4 @@
-;;; kolektiv.el --- Personal Theme
+;;; kolektiv-theme.el --- Personal Theme
 
 ;; Author: Andrew Cherry <andrew@xyncro.com>
 ;; URL: https://github.com/kolektiv/.emacs.d
@@ -35,8 +35,8 @@
 
 ;; Theme
 
-(deftheme kolektiv-dark
-  "Personal Theme (Dark)")
+(deftheme kolektiv
+  "Personal Theme")
 
 (let (
 
@@ -96,7 +96,7 @@
 
   (custom-theme-set-faces
 
-   'kolektiv-dark
+   'kolektiv
 
    ;; Basic
 
@@ -306,4 +306,4 @@
 
 (provide-theme 'kolektiv)
 
-;;; kolektiv.el ends here
+;;; kolektiv-theme.el ends here
