@@ -195,6 +195,7 @@
    ;; Flycheck Color Mode Line
 
    `(flycheck-color-mode-line-error-face     ((,class (:foreground ,error-1))))
+   `(flycheck-color-mode-line-info-face      ((,class (:foreground ,info-1))))
    `(flycheck-color-mode-line-warning-face   ((,class (:foreground ,warning-1))))
    `(flycheck-color-mode-line-success-face   ((,class (:foreground ,success-1))))
 

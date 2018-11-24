@@ -370,6 +370,7 @@
   :custom ((fci-rule-color "#1c1c1c")
            (fci-rule-column 80)
            (fci-rule-use-dashes nil))
+  :disabled t
   :ensure t
   :hook (prog-mode . fci-mode))
 
@@ -620,7 +621,8 @@
            (js2-basic-offset 2)
            (js2-include-node-externs t))
   :ensure t
-  :mode (("\\.js\\'" . js2-mode)))
+  :mode (("\\.js\\'" . js2-mode)
+         ("\\.mjs\\'" . js2-mode)))
 
 (use-package rjsx-mode
   :ensure t)
@@ -702,7 +704,7 @@
 
 (use-package plantuml-mode
   :ensure t
-  :mode (("\\.plantuml\\'" . plantuml-mode-map)))
+  :mode (("\\.plantuml\\'" . plantuml-mode)))
 
 (use-package flycheck-plantuml
   :config (flycheck-plantuml-setup)
