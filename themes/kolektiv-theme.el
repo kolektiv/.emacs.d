@@ -90,7 +90,7 @@
       ;; Semantic
 
       (error-1   "#d70000")  ;; 160
-      (info-1    "#afff00")  ;; 154
+      (info-1    "#ffdd00")  ;; 154
       (success-1 "#afff00")  ;; 154
       (warning-1 "#ff5f00")) ;; 202
 
